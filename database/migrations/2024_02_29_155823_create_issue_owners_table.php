@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('issue_owners', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('owner_id');
+            $table->string('owner_name');
             $table->timestamps();
         });
     }
