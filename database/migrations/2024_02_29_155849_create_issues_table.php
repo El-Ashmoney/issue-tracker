@@ -12,7 +12,21 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('issues', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('issue_id');
+            $table->text('issue_description');
+            $table->unsignedBigInteger('owner_id');
+            $table->unsignedBigInteger('assignee_id');
+            $table->enum('scale', ['Low', 'Medium', 'High']);
+            $table->unsignedBigInteger('company_id');
+            $table->string('time_duration')->nullable();
+            $table->date('issue_date');
+            $table->enum('status', ['On Process', 'Finished']);
+            $table->enum('azure_status', ['Pending', 'Resolved', 'Closed']);
+
+            $table->foreign('owner_id')->references('owner_id')->on('issue_owners');
+            $table->foreign('assignee_id')->references('assignee_id')->on('issue_assignees');
+            $table->foreign('company_id')->references('company_id')->on('companies');
+
             $table->timestamps();
         });
     }
