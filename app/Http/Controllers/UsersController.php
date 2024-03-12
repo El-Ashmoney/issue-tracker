@@ -34,19 +34,16 @@ class UsersController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        if(Auth::user()->role === 'Admin'){
+            $user = User::find($id);
+            return view('pages.edit_user', compact('user'));
+        }else{
+            abort(403, 'Unauthorized Access');
+        }
     }
 
     /**
@@ -54,7 +51,15 @@ class UsersController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        if(Auth::user()->role === 'Admin'){
+            $user = User::find($id);
+            $user->username = $request->username;
+            $user->role     = $request->role;
+            $user->save();
+            return redirect()->route('users')->with('message', 'User Updated Successfully');
+        }else{
+            abort(403, 'Unauthorized Access');
+        }
     }
 
     /**
@@ -62,6 +67,12 @@ class UsersController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        if(Auth::user()->role === 'Admin'){
+            $user = User::find($id);
+            $user->delete();
+            return redirect()->route('users')->with('message', 'User Deleted Successfully');
+        }else{
+            abort(403, 'Unauthorized Access');
+        }
     }
 }

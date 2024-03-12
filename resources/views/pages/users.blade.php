@@ -28,6 +28,12 @@
                 <div class="content-wrapper">
                     <!-- Contextual Classes -->
                     <div class="container-xxl flex-grow-1 container-p-y">
+                        @if(session()->has('message'))
+                            <div class="alert alert-success alert-dismissible text-center" role="alert">
+                                {{ session()->get('message') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
                         <div class="card">
                             <h5 class="card-header text-center">Users</h5>
                             <div class="table-responsive text-nowrap">
@@ -54,10 +60,10 @@
                                                 </td>
                                                 <td>
                                                     @if (Auth::user()->role === 'Admin')
-                                                        <a href="" class="badge btn rounded-pill btn-outline-dark waves-effect">
+                                                        <a href="{{ Route('edit_user', $user->id) }}" class="badge btn rounded-pill btn-outline-dark waves-effect">
                                                             <i class="mdi mdi-pencil-outline me-1"></i> Edit
                                                         </a>
-                                                        <a href="" class="badge btn rounded-pill btn-danger waves-effect waves-light">
+                                                        <a href="{{ Route('delete_user', $user->id) }}" class="badge btn rounded-pill btn-danger waves-effect waves-light" onclick="return confirm('Are You Sure!')">
                                                             <i class="mdi mdi-trash-can-outline me-1"></i> Delete
                                                         </a>
                                                     @else
