@@ -41,21 +41,31 @@
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
-                                        <tr class="table-default">
-                                            <td>Ronnie Shane</td>
-                                            <td>
-                                                <span class="fw-medium">UI/UX Project</span>
-                                            </td>
-                                            <td><i class="mdi mdi-shield-crown"></i> Admin</td>
-                                            <td>
-                                                <a href="" class="btn rounded-pill btn-outline-dark waves-effect">
-                                                    <i class="mdi mdi-pencil-outline me-1"></i> Edit
-                                                </a>
-                                                <a href="" class="btn rounded-pill btn-danger waves-effect waves-light">
-                                                    <i class="mdi mdi-trash-can-outline me-1"></i> Delete
-                                                </a>
-                                            </td>
-                                        </tr>
+                                        @foreach ($users as $user)
+                                            <tr class="table-default">
+                                                <td>{{ $user->username }}</td>
+                                                <td><span class="fw-medium">{{ $user->email }}</span></td>
+                                                <td>
+                                                    @if ($user->role === 'Admin')
+                                                        <span style="color: #fbc531"><i class="mdi mdi-crown"></i> {{ $user->role }}</span>
+                                                    @else
+                                                        <span><i class="mdi mdi-alert-decagram"></i> {{ $user->role }}
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if (Auth::user()->role === 'Admin')
+                                                        <a href="" class="badge btn rounded-pill btn-outline-dark waves-effect">
+                                                            <i class="mdi mdi-pencil-outline me-1"></i> Edit
+                                                        </a>
+                                                        <a href="" class="badge btn rounded-pill btn-danger waves-effect waves-light">
+                                                            <i class="mdi mdi-trash-can-outline me-1"></i> Delete
+                                                        </a>
+                                                    @else
+                                                        <span class="badge rounded-pill bg-danger">Not Authorized</span>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
