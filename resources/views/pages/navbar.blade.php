@@ -40,7 +40,7 @@
                     href="javascript:void(0);"
                     data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                    <img src="{{ asset('img/avatars/1.png') }}" alt class="w-px-40 h-auto rounded-circle" />
+                        <img src="{{ asset('img/avatars/1.png') }}" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end mt-3 py-2">
@@ -49,7 +49,7 @@
                             <div class="d-flex align-items-center">
                             <div class="flex-shrink-0 me-2 pe-1">
                                 <div class="avatar avatar-online">
-                                <img src="{{ asset('img/avatars/1.png') }}" alt class="w-px-40 h-auto rounded-circle" />
+                                    <img src="{{ asset('img/avatars/1.png') }}" alt class="w-px-40 h-auto rounded-circle" />
                                 </div>
                             </div>
                             <div class="flex-grow-1">
@@ -65,7 +65,7 @@
                     <li>
                         <a class="dropdown-item" href="{{ route('profile.show') }}">
                             <i class="mdi mdi-account-outline me-1 mdi-20px"></i>
-                            <span class="align-middle">My Profile</span>
+                            <span class="align-middle">{{ __('Profile') }}</span>
                         </a>
                     </li>
                     <li>
