@@ -92,7 +92,7 @@
                     </a>
                 </li>
                 <li class="menu-item {{ (Route::currentRouteName()) == 'companies' ? 'active' : '' }}">
-                    <a href="" class="menu-link">
+                    <a href="{{ Route('companies') }}" class="menu-link">
                         <div data-i18n="Companies">Companies</div>
                     </a>
                 </li>
