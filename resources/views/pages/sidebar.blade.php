@@ -81,33 +81,33 @@
                 <div class="badge bg-danger rounded-pill ms-auto">5</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item active">
-                    <a href="{{ route('index') }}" class="menu-link">
+                <li class="menu-item {{ (Route::currentRouteName()) == 'index' ? 'active' : '' }}">
+                    <a href="{{ Route('index') }}" class="menu-link">
                         <div data-i18n="Analytics">Analytics</div>
                     </a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item {{ (Route::currentRouteName()) == 'issues' ? 'active' : '' }}">
                     <a href="" class="menu-link">
                         <div data-i18n="Issues">Issues</div>
                     </a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item {{ (Route::currentRouteName()) == 'companies' ? 'active' : '' }}">
                     <a href="" class="menu-link">
                         <div data-i18n="Companies">Companies</div>
                     </a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item {{ (Route::currentRouteName()) == 'issue_assignees' ? 'active' : '' }}">
                     <a href="" class="menu-link">
                         <div data-i18n="Issue-Assignees">Issue Assignees</div>
                     </a>
                 </li>
-                <li class="menu-item">
+                <li class="menu-item {{ (Route::currentRouteName()) == 'issue_owners' ? 'active' : '' }}">
                     <a href="" class="menu-link">
                         <div data-i18n="Issue-Owners">Issue Owners</div>
                     </a>
                 </li>
-                <li class="menu-item">
-                    <a href="" class="menu-link">
+                <li class="menu-item {{ (Route::currentRouteName()) == 'users' ? 'active' : '' }}">
+                    <a href="{{ Route('users') }}" class="menu-link">
                         <div data-i18n="Users">Users</div>
                     </a>
                 </li>
