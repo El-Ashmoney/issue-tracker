@@ -45,7 +45,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end mt-3 py-2">
                     <li>
-                        <a class="dropdown-item pb-2 mb-1" href="#">
+                        <a class="dropdown-item pb-2 mb-1" href="{{ route('profile.show') }}">
                             <div class="d-flex align-items-center">
                             <div class="flex-shrink-0 me-2 pe-1">
                                 <div class="avatar avatar-online">
@@ -53,8 +53,8 @@
                                 </div>
                             </div>
                             <div class="flex-grow-1">
-                                <h6 class="mb-0">John Doe</h6>
-                                <small class="text-muted">Admin</small>
+                                <h6 class="mb-0">{{ Auth::user()->username }}</h6>
+                                <small class="text-muted capitalize">{{ Auth::user()->role }}</small>
                             </div>
                             </div>
                         </a>
@@ -63,7 +63,7 @@
                         <div class="dropdown-divider my-1"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{ route('profile.show') }}">
                             <i class="mdi mdi-account-outline me-1 mdi-20px"></i>
                             <span class="align-middle">My Profile</span>
                         </a>
@@ -87,10 +87,12 @@
                         <div class="dropdown-divider my-1"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="javascript:void(0);">
-                            <i class="mdi mdi-power me-1 mdi-20px"></i>
-                            <span class="align-middle">Log Out</span>
-                        </a>
+                        <form method="POST" action="{{ route('logout') }}" id="logout-form">
+                            @csrf
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item">
+                                <i class="mdi mdi-power me-1 mdi-20px"></i> <span class="align-middle">{{ __('Logout') }}</span>
+                            </a>
+                        </form>
                     </li>
                 </ul>
             </li>
