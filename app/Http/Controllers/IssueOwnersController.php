@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\IssueOwner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IssueOwnersController extends Controller
 {
@@ -11,7 +13,12 @@ class IssueOwnersController extends Controller
      */
     public function index()
     {
-        //
+        if (Auth::user()->role === 'Admin') {
+            $issue_owners = IssueOwner::all();
+            return view('pages.issue_owners', compact('issue_owners'));
+        } else {
+            abort(403, 'Unauthorized Access');
+        }
     }
 
     /**
@@ -43,7 +50,12 @@ class IssueOwnersController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        if (Auth::user()->role === 'Admin') {
+            $issue_owners = IssueOwner::find($id);
+            return view('pages.edit_issue_owner', compact('issue_owners'));
+        } else {
+            abort(403, 'Unauthorized Access');
+        }
     }
 
     /**
@@ -51,7 +63,14 @@ class IssueOwnersController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        if(Auth::user()->role === 'Admin'){
+            $issue_owners = IssueOwner::find($id);
+            $issue_owners->owner_name = $request->owner_name;
+            $issue_owners->save();
+            return redirect()->route('issue_owners')->with('message', 'Issue Owner Updated Successfully');
+        }else{
+            abort(403, 'Unauthorized Access');
+        }
     }
 
     /**
@@ -59,6 +78,12 @@ class IssueOwnersController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        if(Auth::user()->role === 'Admin'){
+            $issue_owners = IssueOwner::find($id);
+            $issue_owners->delete();
+            return redirect()->route('issue_owners')->with('message', 'Issue Owner Deleted Successfully');
+        }else{
+            abort(403, 'Unauthorized Access');
+        }
     }
 }
