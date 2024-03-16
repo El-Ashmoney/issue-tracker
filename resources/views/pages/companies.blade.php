@@ -34,7 +34,7 @@
                             </div>
                         @endif
                         <div class="card">
-                            <h5 class="card-header text-center">Companies</h5>
+                            <h5 class="card-header text-center text-uppercase">Companies</h5>
                             <div class="table-responsive text-nowrap">
                                 <table class="table">
                                     <thead>

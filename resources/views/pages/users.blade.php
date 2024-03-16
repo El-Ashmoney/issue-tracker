@@ -35,7 +35,7 @@
                             </div>
                         @endif
                         <div class="card">
-                            <h5 class="card-header text-center">Users</h5>
+                            <h5 class="card-header text-center text-uppercase">Users</h5>
                             <div class="table-responsive text-nowrap">
                                 <table class="table">
                                     <thead>

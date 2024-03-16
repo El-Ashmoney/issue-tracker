@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\CompaniesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\CompaniesController;
+use App\Http\Controllers\IssueOwnersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,4 +35,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/edit_company/{id}', [CompaniesController::class, 'edit'])->name('edit_company');
     Route::post('/update_company/{id}', [CompaniesController::class, 'update'])->name('update_company');
     Route::post('/delete_company/{id}', [CompaniesController::class, 'destroy'])->name('delete_company');
+
+    // Issue Owners Route Controller
+    Route::get('/issue_owners', [IssueOwnersController::class, 'index'])->name('issue_owners');
 });
