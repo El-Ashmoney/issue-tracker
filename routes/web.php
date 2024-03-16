@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\IssueOwnersController;
+use App\Http\Controllers\IssueAssigneesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,9 @@ use App\Http\Controllers\IssueOwnersController;
 
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-    Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 
     // Home Controller
     Route::get('/', [HomeController::class, 'index'])->name('index');
@@ -41,4 +44,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/edit_issue_owner/{id}', [IssueOwnersController::class, 'edit'])->name('edit_issue_owner');
     Route::post('/update_issue_owner/{id}', [IssueOwnersController::class, 'update'])->name('update_issue_owner');
     Route::post('/delete_issue_owner/{id}', [IssueOwnersController::class, 'destroy'])->name('delete_issue_owner');
+
+    // Issue Assignees Route Controller
+    Route::get('/issue_assignees', [IssueAssigneesController::class, 'index'])->name('issue_assignees');
+    Route::get('/edit_issue_assignee/{id}', [IssueAssigneesController::class, 'edit'])->name('edit_issue_assignee');
+    Route::post('/update_issue_assignee/{id}', [IssueAssigneesController::class, 'update'])->name('update_issue_assignee');
+    Route::post('/delete_issue_assignee/{id}', [IssueAssigneesController::class, 'destroy'])->name('delete_issue_assignee');
 });

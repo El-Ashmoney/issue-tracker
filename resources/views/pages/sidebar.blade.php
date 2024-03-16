@@ -97,7 +97,7 @@
                     </a>
                 </li>
                 <li class="menu-item {{ (Route::currentRouteName()) == 'issue_assignees' ? 'active' : '' }}">
-                    <a href="" class="menu-link">
+                    <a href="{{ Route('issue_assignees') }}" class="menu-link">
                         <div data-i18n="Issue-Assignees">Issue Assignees</div>
                     </a>
                 </li>
