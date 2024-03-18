@@ -33,7 +33,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         @endif
-                        <div class="card">
+                        <div class="card-margin card">
                             <h5 class="card-header text-center text-uppercase">Companies</h5>
                             <div class="table-responsive text-nowrap">
                                 <table class="table">
@@ -65,6 +65,36 @@
                                 </table>
                             </div>
                         </div>
+                        @if ($companies->lastPage() > 1)
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-center">
+                                    {{-- Previous Page Link --}}
+                                    <li class="page-item {{ ($companies->currentPage() == 1) ? ' disabled' : 'prev' }}">
+                                        <a class="page-link waves-effect" href="{{ $companies->previousPageUrl() }}"><i class="tf-icon mdi mdi-chevron-double-left"></i></a>
+                                    </li>
+
+                                    {{-- Pagination Elements --}}
+                                    @foreach ($companies->getUrlRange(1, $companies->lastPage()) as $page => $url)
+                                        {{-- "Three Dots" Separator --}}
+                                        @if ($page == $companies->currentPage()-1 || $page == $companies->currentPage()+1)
+                                            <li class="page-item disabled"><span class="page-link">...</span></li>
+                                        @endif
+
+                                        {{-- Page Number Links --}}
+                                        @if ($page == $companies->currentPage())
+                                            <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
+                                        @elseif ($page == $companies->currentPage()-1 || $page == $companies->currentPage()+1)
+                                            <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                                        @endif
+                                    @endforeach
+
+                                    {{-- Next Page Link --}}
+                                    <li class="page-item {{ ($companies->currentPage() == $companies->lastPage()) ? ' disabled' : 'next' }}">
+                                        <a class="page-link waves-effect" href="{{ $companies->nextPageUrl() }}"><i class="tf-icon mdi mdi-chevron-double-right"></i></a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        @endif
                     </div>
                     <!--/ Contextual Classes -->
                 </div>

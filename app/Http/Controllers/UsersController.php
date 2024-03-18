@@ -13,8 +13,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('pages.users',compact('users'));
+        $users = User::paginate(12);
+        return view('pages.users', compact('users'));
     }
 
     /**
@@ -30,10 +30,10 @@ class UsersController extends Controller
      */
     public function edit(string $id)
     {
-        if(Auth::user()->role === 'Admin'){
+        if (Auth::user()->role === 'Admin') {
             $user = User::find($id);
             return view('pages.edit_user', compact('user'));
-        }else{
+        } else {
             abort(403, 'Unauthorized Access');
         }
     }
@@ -43,13 +43,13 @@ class UsersController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        if(Auth::user()->role === 'Admin'){
+        if (Auth::user()->role === 'Admin') {
             $user = User::find($id);
             $user->username = $request->username;
             $user->role     = $request->role;
             $user->save();
             return redirect()->route('users')->with('message', 'User Updated Successfully');
-        }else{
+        } else {
             abort(403, 'Unauthorized Access');
         }
     }
@@ -59,11 +59,11 @@ class UsersController extends Controller
      */
     public function destroy(string $id)
     {
-        if(Auth::user()->role === 'Admin'){
+        if (Auth::user()->role === 'Admin') {
             $user = User::find($id);
             $user->delete();
             return redirect()->route('users')->with('message', 'User Deleted Successfully');
-        }else{
+        } else {
             abort(403, 'Unauthorized Access');
         }
     }

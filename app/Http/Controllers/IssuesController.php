@@ -14,13 +14,13 @@ class IssuesController extends Controller
      */
     public function index()
     {
-        $issues = Issue::with(['creator', 'owner', 'assignee', 'company'])->get();
+        $issues = Issue::with(['creator', 'owner', 'assignee', 'company'])->paginate(12);
         return view('pages.issues', compact('issues'));
     }
 
     public function issues()
     {
-        $issues = Issue::with(['creator', 'owner', 'assignee', 'company'])->get();
+        $issues = Issue::with(['creator', 'owner', 'assignee', 'company'])->paginate(12);
         return view('pages.all_issues', compact('issues'));
     }
 

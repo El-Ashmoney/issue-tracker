@@ -13,7 +13,7 @@ class IssueOwnersController extends Controller
      */
     public function index()
     {
-        $issue_owners = IssueOwner::all();
+        $issue_owners = IssueOwner::paginate(12);
         return view('pages.issue_owners', compact('issue_owners'));
     }
 

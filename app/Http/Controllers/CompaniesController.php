@@ -13,7 +13,7 @@ class CompaniesController extends Controller
      */
     public function index()
     {
-        $companies = Company::all();
+        $companies = Company::paginate(12);
         return view('pages.companies', compact('companies'));
     }
 
@@ -33,7 +33,7 @@ class CompaniesController extends Controller
         if (Auth::user()->role === 'Admin') {
             $companies = Company::find($id);
             return view('pages.edit_company', compact('companies'));
-        }else{
+        } else {
             abort(403, 'Unauthorized Access');
         }
     }

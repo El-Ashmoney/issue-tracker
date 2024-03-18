@@ -29,7 +29,7 @@
                     <!-- Contextual Classes -->
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <div class="col-xl">
-                            <div class="card mb-4">
+                            <div class="card-margin card mb-4">
                                 <div class="card-header d-flex justify-content-between align-items-center">
                                     <h5 class="mb-0">Edit Issue Owner: {{ $issue_owners->owner_name }}</h5>
                                 </div>
@@ -47,7 +47,7 @@
                                                 aria-label="Full Name"
                                                 aria-describedby="basic-icon-default-fullname2" />
                                         </div>
-                                        <button type="submit" class="btn btn-primary"><span class="mdi mdi-update"></span>&nbsp;Update</button>
+                                        <button type="submit" class="update-btn btn btn-primary"><span class="mdi mdi-update"></span>&nbsp;Update</button>
                                     </form>
                                 </div>
                             </div>

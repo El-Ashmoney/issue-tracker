@@ -13,7 +13,7 @@ class IssueAssigneesController extends Controller
      */
     public function index()
     {
-        $issue_assignees = IssueAssignee::all();
+        $issue_assignees = IssueAssignee::paginate(12);
         return view('pages.issue_assaignees', compact('issue_assignees'));
     }
 
