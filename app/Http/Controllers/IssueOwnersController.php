@@ -13,34 +13,14 @@ class IssueOwnersController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->role === 'Admin') {
-            $issue_owners = IssueOwner::all();
-            return view('pages.issue_owners', compact('issue_owners'));
-        } else {
-            abort(403, 'Unauthorized Access');
-        }
+        $issue_owners = IssueOwner::all();
+        return view('pages.issue_owners', compact('issue_owners'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
     {
         //
     }
@@ -63,12 +43,12 @@ class IssueOwnersController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        if(Auth::user()->role === 'Admin'){
+        if (Auth::user()->role === 'Admin') {
             $issue_owners = IssueOwner::find($id);
             $issue_owners->owner_name = $request->owner_name;
             $issue_owners->save();
             return redirect()->route('issue_owners')->with('message', 'Issue Owner Updated Successfully');
-        }else{
+        } else {
             abort(403, 'Unauthorized Access');
         }
     }
@@ -78,11 +58,11 @@ class IssueOwnersController extends Controller
      */
     public function destroy(string $id)
     {
-        if(Auth::user()->role === 'Admin'){
+        if (Auth::user()->role === 'Admin') {
             $issue_owners = IssueOwner::find($id);
             $issue_owners->delete();
             return redirect()->route('issue_owners')->with('message', 'Issue Owner Deleted Successfully');
-        }else{
+        } else {
             abort(403, 'Unauthorized Access');
         }
     }

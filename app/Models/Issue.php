@@ -42,6 +42,6 @@ class Issue extends Model
     }
 
     public function creator(){
-        return $this->hasMany('App\Models\User', 'created_by');
+        return $this->belongsTo('App\Models\User', 'created_by');
     }
 }

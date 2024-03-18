@@ -13,12 +13,8 @@ class IssueAssigneesController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->role === 'Admin'){
-            $issue_assignees = IssueAssignee::all();
-            return view('pages.issue_assaignees', compact('issue_assignees'));
-        }else{
-            abort(403, 'Unauthorized Access');
-        }
+        $issue_assignees = IssueAssignee::all();
+        return view('pages.issue_assaignees', compact('issue_assignees'));
     }
 
     /**
@@ -50,10 +46,10 @@ class IssueAssigneesController extends Controller
      */
     public function edit(string $id)
     {
-        if(Auth::user()->role === 'Admin'){
+        if (Auth::user()->role === 'Admin') {
             $issue_assignee = IssueAssignee::find($id);
             return view('pages.edit_issue_assignee', compact('issue_assignee'));
-        }else{
+        } else {
             abort(403, 'Unauthorized Access');
         }
     }
@@ -63,13 +59,12 @@ class IssueAssigneesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        if(Auth::user()->role === 'Admin'){
+        if (Auth::user()->role === 'Admin') {
             $issue_assignee = IssueAssignee::find($id);
             $issue_assignee->assignee_name = $request->assignee_name;
             $issue_assignee->save();
             return redirect()->route('issue_assignees')->with('message', 'Issue Assignee Updated Successfully');
-
-        }else{
+        } else {
             abort(403, 'Unauthorized Access');
         }
     }
@@ -79,12 +74,11 @@ class IssueAssigneesController extends Controller
      */
     public function destroy(string $id)
     {
-        if(Auth::user()->role === 'Admin'){
+        if (Auth::user()->role === 'Admin') {
             $issue_assignee = IssueAssignee::find($id);
             $issue_assignee->delete();
             return redirect()->route('issue_assignees')->with('message', 'Issue Assignee Deleted Successfully');
-
-        }else{
+        } else {
             abort(403, 'Unauthorized Access');
         }
     }

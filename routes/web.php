@@ -6,6 +6,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\IssueOwnersController;
 use App\Http\Controllers\IssueAssigneesController;
+use App\Http\Controllers\IssuesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,10 +21,7 @@ use App\Http\Controllers\IssueAssigneesController;
 
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-
+    Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
     // Home Controller
     Route::get('/', [HomeController::class, 'index'])->name('index');
 
@@ -51,9 +49,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::post('/update_issue_assignee/{id}', [IssueAssigneesController::class, 'update'])->name('update_issue_assignee');
     Route::post('/delete_issue_assignee/{id}', [IssueAssigneesController::class, 'destroy'])->name('delete_issue_assignee');
 
-    // Issue Assignees Route Controller
-    // Route::get('/issue', [IssueAssigneesController::class, 'index'])->name('issue_assignees');
-    // Route::get('/edit_issue_assignee/{id}', [IssueAssigneesController::class, 'edit'])->name('edit_issue_assignee');
-    // Route::post('/update_issue_assignee/{id}', [IssueAssigneesController::class, 'update'])->name('update_issue_assignee');
-    // Route::post('/delete_issue_assignee/{id}', [IssueAssigneesController::class, 'destroy'])->name('delete_issue_assignee');
+    // Issue Route Controller
+    Route::get('/issues', [IssuesController::class, 'index'])->name('issues');
+    Route::get('/edit_issue/{id}', [IssuesController::class, 'edit'])->name('edit_issue');
+    Route::post('/update_issue/{id}', [IssuesController::class, 'update'])->name('update_issue');
+    Route::post('/delete_issue/{id}', [IssuesController::class, 'destroy'])->name('delete_issue');
 });

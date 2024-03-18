@@ -13,12 +13,8 @@ class CompaniesController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->role === 'Admin') {
-            $companies = Company::all();
-            return view('pages.companies', compact('companies'));
-        } else {
-            abort(403, 'Unauthorized Access');
-        }
+        $companies = Company::all();
+        return view('pages.companies', compact('companies'));
     }
 
     /**
@@ -30,20 +26,16 @@ class CompaniesController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        $companies = Company::find($id);
-        return view('pages.edit_company', compact('companies'));
+        if (Auth::user()->role === 'Admin') {
+            $companies = Company::find($id);
+            return view('pages.edit_company', compact('companies'));
+        }else{
+            abort(403, 'Unauthorized Access');
+        }
     }
 
     /**
@@ -66,11 +58,11 @@ class CompaniesController extends Controller
      */
     public function destroy(string $id)
     {
-        if(Auth::user()->role === 'Admin'){
+        if (Auth::user()->role === 'Admin') {
             $companies = Company::find($id);
             $companies->delete();
             return redirect()->route('companies')->with('message', 'Company Deleted Successfully');
-        }else{
+        } else {
             abort(403, 'Unauthorized Access');
         }
     }
