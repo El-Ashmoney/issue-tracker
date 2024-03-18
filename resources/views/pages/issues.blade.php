@@ -35,24 +35,48 @@
                         @endif
                         <div class="card">
                             <h5 class="card-header text-center text-uppercase">Issues</h5>
+                            <div class="flex justify-between items-center mx-8 rounded-full">
+                                <a href="" class="btn rounded-pill btn-primary waves-effect waves-light">All Issues</a>
+                                <a href="" class="btn rounded-pill btn-primary waves-effect waves-light">Add Issue</a>
+                            </div>
                             <div class="table-responsive text-nowrap">
                                 <table class="table">
                                     <thead>
                                         <tr>
+                                            <th>ID</th>
+                                            <th>Created By</th>
                                             <th>Issue</th>
+                                            <th>Owner</th>
+                                            <th>Assignee</th>
+                                            <th>Scale</th>
+                                            <th>Company</th>
+                                            <th>Duration</th>
+                                            <th>Issue Date</th>
+                                            <th>Issue Status</th>
+                                            <th>Azure Status</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
-                                    {{-- <tbody class="table-border-bottom-0">
-                                        @foreach ($companies as $company)
+                                    <tbody class="table-border-bottom-0">
+                                        @foreach ($issues as $issue)
                                             <tr class="table-default">
-                                                <td>{{ $company->company_name }}</td>
+                                                <td>{{ $issue->issue_id }}</td>
+                                                <td>{{ $issue->creator ? $issue->creator->username : 'N/A' }}</td>
+                                                <td>{{ $issue->issue_description }}</td>
+                                                <td>{{ $issue->owner ? $issue->owner->owner_name : 'N/A' }}</td>
+                                                <td>{{ $issue->assignee ? $issue->assignee->assignee_name : 'N/A' }}</td>
+                                                <td>{{ $issue->scale }}</td>
+                                                <td>{{ $issue->company ? $issue->company->company_name : 'N/A' }}</td>
+                                                <td>{{ $issue->time_duration }}</td>
+                                                <td>{{ $issue->issue_date }}</td>
+                                                <td>{{ $issue->status }}</td>
+                                                <td>{{ $issue->azure_status }}</td>
                                                 <td>
                                                     @if (Auth::user()->role === 'Admin')
-                                                        <a href="{{ Route('edit_company', $company->company_id) }}" class="badge btn rounded-pill btn-outline-dark waves-effect">
+                                                        <a href="{{ Route('edit_issue', $issue->issue_id) }}" class="badge btn rounded-pill btn-outline-dark waves-effect">
                                                             <i class="mdi mdi-pencil-outline me-1"></i> Edit
                                                         </a>
-                                                        <a href="{{ Route('delete_company', $company->company_id) }}" class="badge btn rounded-pill btn-danger waves-effect waves-light" onclick="return confirm('Are You Sure!')">
+                                                        <a href="{{ Route('delete_issue', $issue->issue_id) }}" class="badge btn rounded-pill btn-danger waves-effect waves-light" onclick="return confirm('Are You Sure!')">
                                                             <i class="mdi mdi-trash-can-outline me-1"></i> Delete
                                                         </a>
                                                     @else
@@ -61,7 +85,7 @@
                                                 </td>
                                             </tr>
                                         @endforeach
-                                    </tbody> --}}
+                                    </tbody>
                                 </table>
                             </div>
                         </div>

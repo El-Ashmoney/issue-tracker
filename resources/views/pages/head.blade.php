@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="{{ asset('vendor/libs/apex-charts/apex-charts.css') }}" />
 
 <!-- Page CSS -->
-
+<script src="https://cdn.tailwindcss.com"></script>
 <!-- Helpers -->
 <script src="{{ asset('vendor/js/helpers.js') }}"></script>
 <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
