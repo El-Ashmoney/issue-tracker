@@ -1,11 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Validation\ValidatesRequests;
+
+use App\Models\User;
+use App\Models\Issue;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class HomeController extends Controller
 {

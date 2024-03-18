@@ -14,6 +14,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::paginate(12);
+        // $users_count = User::count();
         return view('pages.users', compact('users'));
     }
 

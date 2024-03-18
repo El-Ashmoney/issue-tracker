@@ -99,11 +99,13 @@
                     <li class="menu-item {{ (Route::currentRouteName()) == 'issues' ? 'active' : '' }}">
                         <a href="{{ Route('issues') }}" class="menu-link">
                             <div data-i18n="Issues">My Issues</div>
+                            <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $my_issues_count }}</span>
                         </a>
                     </li>
                     <li class="menu-item {{ (Route::currentRouteName()) == 'all_issues' ? 'active' : '' }}">
                         <a href="{{ Route('all_issues') }}" class="menu-link">
                             <div data-i18n="all_issues">All Issues</div>
+                            <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $issues_count }}</span>
                         </a>
                     </li>
                 </ul>
@@ -121,21 +123,25 @@
                     <li class="menu-item {{ (Route::currentRouteName()) == 'companies' ? 'active' : '' }}">
                         <a href="{{ Route('companies') }}" class="menu-link">
                             <div data-i18n="Companies">Companies</div>
+                            <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $companies_count }}</span>
                         </a>
                     </li>
                     <li class="menu-item {{ (Route::currentRouteName()) == 'issue_assignees' ? 'active' : '' }}">
                         <a href="{{ Route('issue_assignees') }}" class="menu-link">
                             <div data-i18n="Issue-Assignees">Issue Assignees</div>
+                            <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $issue_assignees_count }}</span>
                         </a>
                     </li>
                     <li class="menu-item {{ (Route::currentRouteName()) == 'issue_owners' ? 'active' : '' }}">
                         <a href="{{ Route('issue_owners') }}" class="menu-link">
                             <div data-i18n="Issue-Owners">Issue Owners</div>
+                            <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $issue_owners_count }}</span>
                         </a>
                     </li>
                     <li class="menu-item {{ (Route::currentRouteName()) == 'users' ? 'active' : '' }}">
                         <a href="{{ Route('users') }}" class="menu-link">
                             <div data-i18n="Users">Users</div>
+                            <span class="flex justify-end badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $users_count }}</span>
                         </a>
                     </li>
                 </ul>

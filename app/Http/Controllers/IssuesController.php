@@ -14,12 +14,16 @@ class IssuesController extends Controller
      */
     public function index()
     {
+        // $issues_count = Issue::count();
+        // $my_issues_count = Issue::where('created_by', Auth::user()->id)->count();
         $issues = Issue::with(['creator', 'owner', 'assignee', 'company'])->paginate(12);
         return view('pages.issues', compact('issues'));
     }
 
     public function issues()
     {
+        // $issues_count = Issue::count();
+        // $my_issues_count = Issue::where('created_by', Auth::user()->id)->count();
         $issues = Issue::with(['creator', 'owner', 'assignee', 'company'])->paginate(12);
         return view('pages.all_issues', compact('issues'));
     }
