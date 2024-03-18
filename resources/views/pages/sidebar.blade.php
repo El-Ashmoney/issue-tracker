@@ -78,7 +78,6 @@
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons mdi mdi-home-outline"></i>
                 <div data-i18n="Dashboards">Dashboards</div>
-                <div class="badge bg-danger rounded-pill ms-auto">5</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item {{ (Route::currentRouteName()) == 'index' ? 'active' : '' }}">
@@ -104,7 +103,7 @@
                     </li>
                     <li class="menu-item {{ (Route::currentRouteName()) == 'all_issues' ? 'active' : '' }}">
                         <a href="{{ Route('all_issues') }}" class="menu-link">
-                            <div data-i18n="Issues">All Issues</div>
+                            <div data-i18n="all_issues">All Issues</div>
                         </a>
                     </li>
                 </ul>

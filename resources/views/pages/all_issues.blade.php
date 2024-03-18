@@ -34,9 +34,9 @@
                             </div>
                         @endif
                         <div class="card">
-                            <h5 class="card-header text-center text-uppercase">Issues</h5>
+                            <h5 class="card-header text-center text-uppercase">All Issues</h5>
                             <div class="flex justify-between items-center rounded-full" style="margin: 10px 20px">
-                                <a href="" class="btn rounded-pill btn-primary waves-effect waves-light">All Issues</a>
+                                <a href="" class="btn rounded-pill btn-primary waves-effect waves-light">Download Issues Report</a>
                                 <a href="" class="btn rounded-pill btn-primary waves-effect waves-light">Add Issue</a>
                             </div>
                             <div class="table-responsive text-nowrap">
@@ -44,6 +44,7 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
+                                            <th>Created By</th>
                                             <th>Issue</th>
                                             <th>Owner</th>
                                             <th>Assignee</th>
@@ -60,6 +61,7 @@
                                         @foreach ($issues as $issue)
                                             <tr class="table-default">
                                                 <td>{{ $issue->issue_id }}</td>
+                                                <td>{{ $issue->creator ? $issue->creator->username : 'N/A' }}</td>
                                                 <td>{{ $issue->issue_description }}</td>
                                                 <td>{{ $issue->owner ? $issue->owner->owner_name : 'N/A' }}</td>
                                                 <td>{{ $issue->assignee ? $issue->assignee->assignee_name : 'N/A' }}</td>

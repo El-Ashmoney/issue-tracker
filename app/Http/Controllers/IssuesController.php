@@ -18,6 +18,12 @@ class IssuesController extends Controller
         return view('pages.issues', compact('issues'));
     }
 
+    public function issues()
+    {
+        $issues = Issue::with(['creator', 'owner', 'assignee', 'company'])->get();
+        return view('pages.all_issues', compact('issues'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
