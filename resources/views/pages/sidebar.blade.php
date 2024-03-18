@@ -86,32 +86,64 @@
                         <div data-i18n="Analytics">Analytics</div>
                     </a>
                 </li>
-                <li class="menu-item {{ (Route::currentRouteName()) == 'issues' ? 'active' : '' }}">
-                    <a href="{{ Route('issues') }}" class="menu-link">
-                        <div data-i18n="Issues">Issues</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ (Route::currentRouteName()) == 'companies' ? 'active' : '' }}">
-                    <a href="{{ Route('companies') }}" class="menu-link">
-                        <div data-i18n="Companies">Companies</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ (Route::currentRouteName()) == 'issue_assignees' ? 'active' : '' }}">
-                    <a href="{{ Route('issue_assignees') }}" class="menu-link">
-                        <div data-i18n="Issue-Assignees">Issue Assignees</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ (Route::currentRouteName()) == 'issue_owners' ? 'active' : '' }}">
-                    <a href="{{ Route('issue_owners') }}" class="menu-link">
-                        <div data-i18n="Issue-Owners">Issue Owners</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ (Route::currentRouteName()) == 'users' ? 'active' : '' }}">
-                    <a href="{{ Route('users') }}" class="menu-link">
-                        <div data-i18n="Users">Users</div>
-                    </a>
-                </li>
             </ul>
+            <li class="menu-header fw-medium mt-4">
+                <span class="menu-header-text">Issues &amp; Related</span>
+            </li>
+
+            <li class="menu-item open">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons mdi mdi-window-maximize"></i>
+                    <div data-i18n="Layouts">Issues</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item {{ (Route::currentRouteName()) == 'issues' ? 'active' : '' }}">
+                        <a href="{{ Route('issues') }}" class="menu-link">
+                            <div data-i18n="Issues">My Issues</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ (Route::currentRouteName()) == 'all_issues' ? 'active' : '' }}">
+                        <a href="{{ Route('all_issues') }}" class="menu-link">
+                            <div data-i18n="Issues">All Issues</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-header fw-medium mt-4">
+                <span class="menu-header-text">Misc</span>
+            </li>
+            <li class="menu-item open">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons mdi mdi-cube-outline"></i>
+                    <div data-i18n="Misc">Misc</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item {{ (Route::currentRouteName()) == 'companies' ? 'active' : '' }}">
+                        <a href="{{ Route('companies') }}" class="menu-link">
+                            <div data-i18n="Companies">Companies</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ (Route::currentRouteName()) == 'issue_assignees' ? 'active' : '' }}">
+                        <a href="{{ Route('issue_assignees') }}" class="menu-link">
+                            <div data-i18n="Issue-Assignees">Issue Assignees</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ (Route::currentRouteName()) == 'issue_owners' ? 'active' : '' }}">
+                        <a href="{{ Route('issue_owners') }}" class="menu-link">
+                            <div data-i18n="Issue-Owners">Issue Owners</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ (Route::currentRouteName()) == 'users' ? 'active' : '' }}">
+                        <a href="{{ Route('users') }}" class="menu-link">
+                            <div data-i18n="Users">Users</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- Apps -->
+
         </li>
     </ul>
 </aside>

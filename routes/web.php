@@ -51,6 +51,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
     // Issue Route Controller
     Route::get('/issues', [IssuesController::class, 'index'])->name('issues');
+    Route::get('/all_issues', [IssuesController::class, 'index'])->name('all_issues');
     Route::get('/edit_issue/{id}', [IssuesController::class, 'edit'])->name('edit_issue');
     Route::post('/update_issue/{id}', [IssuesController::class, 'update'])->name('update_issue');
     Route::post('/delete_issue/{id}', [IssuesController::class, 'destroy'])->name('delete_issue');
