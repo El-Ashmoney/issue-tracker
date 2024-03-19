@@ -147,6 +147,22 @@
                 </ul>
             </li>
 
+            <li class="menu-item open">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons mdi mdi-cube-outline"></i>
+                    <div data-i18n="Misc">Entities</div>
+                </a>
+                <ul class="menu-sub">
+                    @foreach ($entitiesWithSectorCount as $entity)
+                        <li class="menu-item {{ (Route::currentRouteName() == 'show_entity' && request()->entity == $entity->id) ? 'active' : '' }}">
+                            <a href="{{ route('show_entity', ['id' => $entity->id]) }}" class="menu-link">
+                                <div data-i18n="{{ $entity->name }}">{{ $entity->name }}</div>
+                                <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $entity->sectors_count }}</span>
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </li>
             <!-- Apps -->
 
         </li>

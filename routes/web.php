@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\CompaniesController;
+use App\Http\Controllers\EntitiesController;
 use App\Http\Controllers\IssueOwnersController;
 use App\Http\Controllers\IssueAssigneesController;
 use App\Http\Controllers\IssuesController;
@@ -55,4 +56,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/edit_issue/{id}', [IssuesController::class, 'edit'])->name('edit_issue');
     Route::post('/update_issue/{id}', [IssuesController::class, 'update'])->name('update_issue');
     Route::post('/delete_issue/{id}', [IssuesController::class, 'destroy'])->name('delete_issue');
+
+    // Issue Route Controller
+    Route::get('/entities', [EntitiesController::class, 'index'])->name('entities');
+    Route::get('/show_entity/{id}', [IssuesController::class, 'edit'])->name('show_entity');
+    // Route::post('/update_issue/{id}', [IssuesController::class, 'update'])->name('update_issue');
+    // Route::post('/delete_issue/{id}', [IssuesController::class, 'destroy'])->name('delete_issue');
 });

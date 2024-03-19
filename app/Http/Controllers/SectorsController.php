@@ -2,27 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Issue;
-
-
-use App\Models\Entity;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class HomeController extends Controller
+class SectorsController extends Controller
 {
-    use AuthorizesRequests, ValidatesRequests;
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $entities = Entity::with('sectors')->get();
-        return view('pages.index', compact('entities'));
+        //
     }
 
     /**
