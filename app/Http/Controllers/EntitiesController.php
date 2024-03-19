@@ -12,7 +12,7 @@ class EntitiesController extends Controller
      */
     public function index()
     {
-        
+
     }
 
     /**

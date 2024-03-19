@@ -62,7 +62,7 @@ class CompaniesController extends Controller
             $companies = Company::find($id);
             $companies->delete();
             return redirect()->route('companies')->with('message', 'Company Deleted Successfully');
-        } else {
+        }else{
             abort(403, 'Unauthorized Access');
         }
     }

@@ -8,6 +8,7 @@ use App\Http\Controllers\EntitiesController;
 use App\Http\Controllers\IssueOwnersController;
 use App\Http\Controllers\IssueAssigneesController;
 use App\Http\Controllers\IssuesController;
+use App\Http\Controllers\SectorsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,9 @@ use App\Http\Controllers\IssuesController;
 
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-    Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
     // Home Controller
     Route::get('/', [HomeController::class, 'index'])->name('index');
 
@@ -57,8 +60,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::post('/update_issue/{id}', [IssuesController::class, 'update'])->name('update_issue');
     Route::post('/delete_issue/{id}', [IssuesController::class, 'destroy'])->name('delete_issue');
 
-    // Issue Route Controller
+    // Entities Route Controller
     Route::get('/show_entity/{id}', [EntitiesController::class, 'show'])->name('show_entity');
-    // Route::post('/update_issue/{id}', [IssuesController::class, 'update'])->name('update_issue');
-    // Route::post('/delete_issue/{id}', [IssuesController::class, 'destroy'])->name('delete_issue');
+
+    // Sectors Route Controller
+    Route::get('/edit_sector/{id}', [SectorsController::class, 'edit'])->name('edit_sector');
+    Route::post('/update_sector/{id}', [SectorsController::class, 'update'])->name('update_sector');
+    Route::post('/delete_sector/{id}', [SectorsController::class, 'destroy'])->name('delete_sector');
 });

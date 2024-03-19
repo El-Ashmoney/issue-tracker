@@ -31,19 +31,19 @@
                         <div class="col-xl">
                             <div class="card-margin card mb-4">
                                 <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h5 class="display-4 mb-0">Edit Issue Assignee: {{ $issue_assignee->assignee_name }}</h5>
+                                    <h5 class="display-4 mb-0">Edit Sector: {{ $sectors->name }}</h5>
                                 </div>
                                 <div class="card-body">
-                                    <form action="{{ Route('update_issue_assignee', $issue_assignee->assignee_id) }}" method="POST">
+                                    <form action="{{ Route('update_sector', $sectors->id) }}" method="POST">
                                         @csrf
                                         <div class="input-group input-group-merge mb-4">
                                             <span id="basic-icon-default-fullname2" class="input-group-text"><i class="mdi mdi-account-outline"></i></span>
                                             <input
                                                 type="text"
-                                                name="assignee_name"
+                                                name="sector_name"
                                                 class="form-control"
                                                 id="basic-icon-default-fullname"
-                                                value="{{ $issue_assignee->assignee_name }}"
+                                                value="{{ $sectors->name }}"
                                                 aria-label="Full Name"
                                                 aria-describedby="basic-icon-default-fullname2" />
                                         </div>

@@ -34,7 +34,7 @@
                             </div>
                         @endif
                         <div class="card-margin card">
-                            <h5 class="card-header text-center text-uppercase">Entity: {{ $entity->name }}</h5>
+                            <h5 class="display-4 card-header text-center text-uppercase">Entity: {{ $entity->name }}</h5>
                             <div class="flex justify-between items-center rounded-full" style="margin: 10px 20px">
                                 <a href="" class="btn rounded-pill btn-primary waves-effect waves-light">Add Entity</a>
                             </div>
@@ -51,7 +51,16 @@
                                             <tr class="table-default">
                                                 <td>{{ $sector->name }}</td>
                                                 <td>
-
+                                                    @if (Auth::user()->role === 'Admin')
+                                                        <a href="{{ Route('edit_sector', $sector->id) }}" class="badge btn rounded-pill btn-outline-dark waves-effect">
+                                                            <i class="mdi mdi-pencil-outline me-1"></i> Edit
+                                                        </a>
+                                                        <a href="{{ Route('delete_sector', $sector->id) }}" class="badge btn rounded-pill btn-danger waves-effect waves-light" onclick="return confirm('Are You Sure!')">
+                                                            <i class="mdi mdi-trash-can-outline me-1"></i> Delete
+                                                        </a>
+                                                    @else
+                                                        <span class="badge rounded-pill bg-danger">Not Authorized</span>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @empty

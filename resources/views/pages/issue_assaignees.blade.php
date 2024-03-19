@@ -34,7 +34,7 @@
                             </div>
                         @endif
                         <div class="card-margin card">
-                            <h5 class="card-header text-center text-uppercase">Issue Assignees</h5>
+                            <h5 class="display-4 card-header text-center text-uppercase">Issue Assignees</h5>
                             <div class="table-responsive text-nowrap">
                                 <table class="table">
                                     <thead>

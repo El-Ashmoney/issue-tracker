@@ -34,7 +34,7 @@
                             </div>
                         @endif
                         <div class="card-margin card">
-                            <h5 class="card-header text-center text-uppercase">Issues</h5>
+                            <h5 class="display-4 card-header text-center text-uppercase">Issues</h5>
                             <div class="flex justify-between items-center rounded-full" style="margin: 10px 20px">
                                 <a href="" class="btn rounded-pill btn-primary waves-effect waves-light">All Issues</a>
                                 <a href="" class="btn rounded-pill btn-primary waves-effect waves-light">Add Issue</a>

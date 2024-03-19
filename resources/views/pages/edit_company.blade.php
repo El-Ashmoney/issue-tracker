@@ -31,7 +31,7 @@
                         <div class="col-xl">
                             <div class="card-margin card mb-4">
                                 <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h5 class="mb-0">Edit Company: {{ $companies->company_name }}</h5>
+                                    <h5 class="display-4 mb-0">Edit Company: {{ $companies->company_name }}</h5>
                                 </div>
                                 <div class="card-body">
                                     <form action="{{ Route('update_company', $companies->company_id) }}" method="POST">
