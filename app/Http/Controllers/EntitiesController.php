@@ -37,7 +37,9 @@ class EntitiesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $entity = Entity::findOrFail($id);
+        $sectors = $entity->sectors()->paginate(12);
+        return view('pages.show_entity', compact('entity', 'sectors'));
     }
 
     /**

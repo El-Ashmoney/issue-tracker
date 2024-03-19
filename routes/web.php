@@ -59,7 +59,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
     // Issue Route Controller
     Route::get('/entities', [EntitiesController::class, 'index'])->name('entities');
-    Route::get('/show_entity/{id}', [IssuesController::class, 'edit'])->name('show_entity');
+    Route::get('/show_entity/{id}', [EntitiesController::class, 'show'])->name('show_entity');
     // Route::post('/update_issue/{id}', [IssuesController::class, 'update'])->name('update_issue');
     // Route::post('/delete_issue/{id}', [IssuesController::class, 'destroy'])->name('delete_issue');
 });
