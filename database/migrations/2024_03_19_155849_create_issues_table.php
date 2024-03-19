@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('issues', function (Blueprint $table) {
             $table->bigIncrements('issue_id');
             $table->text('issue_description');
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('sector_id');
             $table->unsignedBigInteger('owner_id');
             $table->unsignedBigInteger('assignee_id');
             $table->enum('scale', ['Low', 'Medium', 'High']);
@@ -23,6 +25,8 @@ return new class extends Migration
             $table->enum('status', ['On Process', 'Finished']);
             $table->enum('azure_status', ['Pending', 'Resolved', 'Closed']);
 
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('sector_id')->references('id')->on('sectors')->onDelete('cascade');
             $table->foreign('owner_id')->references('owner_id')->on('issue_owners');
             $table->foreign('assignee_id')->references('assignee_id')->on('issue_assignees');
             $table->foreign('company_id')->references('company_id')->on('companies');
