@@ -47,11 +47,11 @@
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
-                                        @forelse ($sectors as $sector) <!-- Use $sectors for paginated data -->
+                                        @forelse ($sectors as $sector)
                                             <tr class="table-default">
                                                 <td>{{ $sector->name }}</td>
                                                 <td>
-                                                    {{-- Actions can be placed here --}}
+
                                                 </td>
                                             </tr>
                                         @empty

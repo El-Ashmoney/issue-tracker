@@ -74,7 +74,7 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboards -->
-        <li class="menu-item active open">
+        <li class="menu-item {{ request()->is('dashboard*') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons mdi mdi-home-outline"></i>
                 <div data-i18n="Dashboards">Dashboards</div>
@@ -89,82 +89,79 @@
             <li class="menu-header fw-medium mt-4">
                 <span class="menu-header-text">Issues &amp; Related</span>
             </li>
+        </li>
+        <li class="menu-item {{ request()->is('issues*', 'all_issues*') ? 'open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons mdi mdi-window-maximize"></i>
+                <div data-i18n="Layouts">Issues</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ (Route::currentRouteName()) == 'issues' ? 'active' : '' }}">
+                    <a href="{{ Route('issues') }}" class="menu-link">
+                        <div data-i18n="Issues">My Issues</div>
+                        <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $my_issues_count }}</span>
+                    </a>
+                </li>
+                <li class="menu-item {{ (Route::currentRouteName()) == 'all_issues' ? 'active' : '' }}">
+                    <a href="{{ Route('all_issues') }}" class="menu-link">
+                        <div data-i18n="all_issues">All Issues</div>
+                        <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $issues_count }}</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
 
-            <li class="menu-item open">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons mdi mdi-window-maximize"></i>
-                    <div data-i18n="Layouts">Issues</div>
-                </a>
-                <ul class="menu-sub">
-                    <li class="menu-item {{ (Route::currentRouteName()) == 'issues' ? 'active' : '' }}">
-                        <a href="{{ Route('issues') }}" class="menu-link">
-                            <div data-i18n="Issues">My Issues</div>
-                            <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $my_issues_count }}</span>
-                        </a>
-                    </li>
-                    <li class="menu-item {{ (Route::currentRouteName()) == 'all_issues' ? 'active' : '' }}">
-                        <a href="{{ Route('all_issues') }}" class="menu-link">
-                            <div data-i18n="all_issues">All Issues</div>
-                            <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $issues_count }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+        <li class="menu-header fw-medium mt-4">
+            <span class="menu-header-text">Misc</span>
+        </li>
+        <li class="menu-item {{ request()->is('companies*', 'issue_assignees*', 'issue_owners*', 'users*') ? 'open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons mdi mdi-cube-outline"></i>
+                <div data-i18n="Misc">Misc</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ (Route::currentRouteName()) == 'companies' ? 'active' : '' }}">
+                    <a href="{{ Route('companies') }}" class="menu-link">
+                        <div data-i18n="Companies">Companies</div>
+                        <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $companies_count }}</span>
+                    </a>
+                </li>
+                <li class="menu-item {{ (Route::currentRouteName()) == 'issue_assignees' ? 'active' : '' }}">
+                    <a href="{{ Route('issue_assignees') }}" class="menu-link">
+                        <div data-i18n="Issue-Assignees">Issue Assignees</div>
+                        <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $issue_assignees_count }}</span>
+                    </a>
+                </li>
+                <li class="menu-item {{ (Route::currentRouteName()) == 'issue_owners' ? 'active' : '' }}">
+                    <a href="{{ Route('issue_owners') }}" class="menu-link">
+                        <div data-i18n="Issue-Owners">Issue Owners</div>
+                        <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $issue_owners_count }}</span>
+                    </a>
+                </li>
+                <li class="menu-item {{ (Route::currentRouteName()) == 'users' ? 'active' : '' }}">
+                    <a href="{{ Route('users') }}" class="menu-link">
+                        <div data-i18n="Users">Users</div>
+                        <span class="flex justify-end badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $users_count }}</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
 
-            <li class="menu-header fw-medium mt-4">
-                <span class="menu-header-text">Misc</span>
-            </li>
-            <li class="menu-item open">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons mdi mdi-cube-outline"></i>
-                    <div data-i18n="Misc">Misc</div>
-                </a>
-                <ul class="menu-sub">
-                    <li class="menu-item {{ (Route::currentRouteName()) == 'companies' ? 'active' : '' }}">
-                        <a href="{{ Route('companies') }}" class="menu-link">
-                            <div data-i18n="Companies">Companies</div>
-                            <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $companies_count }}</span>
+        <li class="menu-item {{ request()->is('entities*', 'show_entity*') ? 'open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons mdi mdi-view-grid-outline"></i>
+                <div data-i18n="Misc">Entities</div>
+            </a>
+            <ul class="menu-sub">
+                @foreach ($entitiesWithSectorCount as $entity)
+                    <li class="menu-item {{ (Route::currentRouteName() == 'show_entity' && request()->id == $entity->id) ? 'active' : '' }}">
+                        <a href="{{ route('show_entity', ['id' => $entity->id]) }}" class="menu-link">
+                            <div data-i18n="{{ $entity->name }}">{{ $entity->name }}</div>
+                            <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $entity->sectors_count }}</span>
                         </a>
                     </li>
-                    <li class="menu-item {{ (Route::currentRouteName()) == 'issue_assignees' ? 'active' : '' }}">
-                        <a href="{{ Route('issue_assignees') }}" class="menu-link">
-                            <div data-i18n="Issue-Assignees">Issue Assignees</div>
-                            <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $issue_assignees_count }}</span>
-                        </a>
-                    </li>
-                    <li class="menu-item {{ (Route::currentRouteName()) == 'issue_owners' ? 'active' : '' }}">
-                        <a href="{{ Route('issue_owners') }}" class="menu-link">
-                            <div data-i18n="Issue-Owners">Issue Owners</div>
-                            <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $issue_owners_count }}</span>
-                        </a>
-                    </li>
-                    <li class="menu-item {{ (Route::currentRouteName()) == 'users' ? 'active' : '' }}">
-                        <a href="{{ Route('users') }}" class="menu-link">
-                            <div data-i18n="Users">Users</div>
-                            <span class="flex justify-end badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $users_count }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="menu-item open">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                    <i class="menu-icon tf-icons mdi mdi-cube-outline"></i>
-                    <div data-i18n="Misc">Entities</div>
-                </a>
-                <ul class="menu-sub">
-                    @foreach ($entitiesWithSectorCount as $entity)
-                        <li class="menu-item {{ (Route::currentRouteName() == 'show_entity' && request()->entity == $entity->id) ? 'active' : '' }}">
-                            <a href="{{ route('show_entity', ['id' => $entity->id]) }}" class="menu-link">
-                                <div data-i18n="{{ $entity->name }}">{{ $entity->name }}</div>
-                                <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $entity->sectors_count }}</span>
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
-            </li>
-            <!-- Apps -->
-
+                @endforeach
+            </ul>
         </li>
     </ul>
 </aside>

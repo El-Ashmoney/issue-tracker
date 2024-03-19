@@ -12,8 +12,7 @@ class EntitiesController extends Controller
      */
     public function index()
     {
-        $entities = Entity::with('sectors')->paginate(12);
-        return view('pages.entities', compact('entities'));
+        
     }
 
     /**
