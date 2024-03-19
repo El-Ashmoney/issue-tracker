@@ -66,35 +66,31 @@
                             </div>
                         </div>
                         @if ($issue_owners->lastPage() > 1)
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination justify-content-center">
-                                    {{-- Previous Page Link --}}
-                                    <li class="page-item {{ ($issue_owners->currentPage() == 1) ? ' disabled' : 'prev' }}">
-                                        <a class="page-link waves-effect" href="{{ $issue_owners->previousPageUrl() }}"><i class="tf-icon mdi mdi-chevron-double-left"></i></a>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                {{-- Previous Page Link --}}
+                                <li class="page-item {{ ($issue_owners->currentPage() == 1) ? ' disabled' : '' }}">
+                                    <a class="page-link waves-effect" href="{{ $issue_owners->previousPageUrl() }}"><i class="tf-icon mdi mdi-chevron-double-left"></i></a>
+                                </li>
+
+                                {{-- Pagination Elements --}}
+                                @php
+                                    $start = max($issue_owners->currentPage() - 2, 1);
+                                    $end = min(max($issue_owners->currentPage() + 2, 5), $issue_owners->lastPage());
+                                @endphp
+                                @for ($i = $start; $i <= $end; $i++)
+                                    <li class="page-item {{ ($issue_owners->currentPage() == $i) ? ' active' : '' }}">
+                                        <a class="page-link" href="{{ $issue_owners->url($i) }}">{{ $i }}</a>
                                     </li>
+                                @endfor
 
-                                    {{-- Pagination Elements --}}
-                                    @foreach ($issue_owners->getUrlRange(1, $issue_owners->lastPage()) as $page => $url)
-                                        {{-- "Three Dots" Separator --}}
-                                        @if ($page == $issue_owners->currentPage()-1 || $page == $issue_owners->currentPage()+1)
-                                            <li class="page-item disabled"><span class="page-link">...</span></li>
-                                        @endif
-
-                                        {{-- Page Number Links --}}
-                                        @if ($page == $issue_owners->currentPage())
-                                            <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
-                                        @elseif ($page == $issue_owners->currentPage()-1 || $page == $issue_owners->currentPage()+1)
-                                            <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
-                                        @endif
-                                    @endforeach
-
-                                    {{-- Next Page Link --}}
-                                    <li class="page-item {{ ($issue_owners->currentPage() == $issue_owners->lastPage()) ? ' disabled' : 'next' }}">
-                                        <a class="page-link waves-effect" href="{{ $issue_owners->nextPageUrl() }}"><i class="tf-icon mdi mdi-chevron-double-right"></i></a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        @endif
+                                {{-- Next Page Link --}}
+                                <li class="page-item {{ ($issue_owners->currentPage() == $issue_owners->lastPage()) ? ' disabled' : '' }}">
+                                    <a class="page-link waves-effect" href="{{ $issue_owners->nextPageUrl() }}"><i class="tf-icon mdi mdi-chevron-double-right"></i></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    @endif
                     </div>
                     <!--/ Contextual Classes -->
                 </div>

@@ -69,27 +69,23 @@
                             <nav aria-label="Page navigation">
                                 <ul class="pagination justify-content-center">
                                     {{-- Previous Page Link --}}
-                                    <li class="page-item {{ ($issue_assignees->currentPage() == 1) ? ' disabled' : 'prev' }}">
+                                    <li class="page-item {{ ($issue_assignees->currentPage() == 1) ? ' disabled' : '' }}">
                                         <a class="page-link waves-effect" href="{{ $issue_assignees->previousPageUrl() }}"><i class="tf-icon mdi mdi-chevron-double-left"></i></a>
                                     </li>
 
                                     {{-- Pagination Elements --}}
-                                    @foreach ($issue_assignees->getUrlRange(1, $issue_assignees->lastPage()) as $page => $url)
-                                        {{-- "Three Dots" Separator --}}
-                                        @if ($page == $issue_assignees->currentPage()-1 || $page == $issue_assignees->currentPage()+1)
-                                            <li class="page-item disabled"><span class="page-link">...</span></li>
-                                        @endif
-
-                                        {{-- Page Number Links --}}
-                                        @if ($page == $issue_assignees->currentPage())
-                                            <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
-                                        @elseif ($page == $issue_assignees->currentPage()-1 || $page == $issue_assignees->currentPage()+1)
-                                            <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
-                                        @endif
-                                    @endforeach
+                                    @php
+                                        $start = max($issue_assignees->currentPage() - 2, 1);
+                                        $end = min(max($issue_assignees->currentPage() + 2, 5), $issue_assignees->lastPage());
+                                    @endphp
+                                    @for ($i = $start; $i <= $end; $i++)
+                                        <li class="page-item {{ ($issue_assignees->currentPage() == $i) ? ' active' : '' }}">
+                                            <a class="page-link" href="{{ $issue_assignees->url($i) }}">{{ $i }}</a>
+                                        </li>
+                                    @endfor
 
                                     {{-- Next Page Link --}}
-                                    <li class="page-item {{ ($issue_assignees->currentPage() == $issue_assignees->lastPage()) ? ' disabled' : 'next' }}">
+                                    <li class="page-item {{ ($issue_assignees->currentPage() == $issue_assignees->lastPage()) ? ' disabled' : '' }}">
                                         <a class="page-link waves-effect" href="{{ $issue_assignees->nextPageUrl() }}"><i class="tf-icon mdi mdi-chevron-double-right"></i></a>
                                     </li>
                                 </ul>
