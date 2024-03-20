@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Issue;
 use App\Models\Entity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,4 +23,10 @@ class Sector extends Model
     {
         return $this->belongsTo(Entity::class);
     }
+
+    public function issues()
+    {
+        return $this->hasMany(Issue::class, 'sector_id');
+    }
+
 }

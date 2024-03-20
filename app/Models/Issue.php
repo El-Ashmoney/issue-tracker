@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Sector;
+use App\Models\Company;
+use App\Models\IssueOwner;
+use App\Models\IssueAssignee;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Issue extends Model
 {
@@ -16,6 +20,7 @@ class Issue extends Model
     protected $fillable = [
         'created_by',
         'issue_description',
+        'sector_id',
         'owner_id',
         'assignee_id',
         'scale',
@@ -44,4 +49,10 @@ class Issue extends Model
     public function creator(){
         return $this->belongsTo('App\Models\User', 'created_by');
     }
+
+    public function sector()
+    {
+        return $this->belongsTo(Sector::class, 'sector_id');
+    }
+
 }

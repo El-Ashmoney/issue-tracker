@@ -68,7 +68,7 @@
                                                 <td>{{ $issue->scale }}</td>
                                                 <td>{{ $issue->company ? $issue->company->company_name : 'N/A' }}</td>
                                                 <td>{{ $issue->time_duration }}</td>
-                                                <td>{{ $issue->issue_date }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($issue->created_at)->format('Y-m-d') }}</td>
                                                 <td>{{ $issue->status }}</td>
                                                 <td>{{ $issue->azure_status }}</td>
                                                 <td>

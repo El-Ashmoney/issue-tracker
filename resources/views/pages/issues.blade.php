@@ -36,8 +36,8 @@
                         <div class="card-margin card">
                             <h5 class="display-4 card-header text-center text-uppercase">Issues</h5>
                             <div class="flex justify-between items-center rounded-full" style="margin: 10px 20px">
-                                <a href="" class="btn rounded-pill btn-primary waves-effect waves-light">All Issues</a>
-                                <a href="" class="btn rounded-pill btn-primary waves-effect waves-light">Add Issue</a>
+                                <a href="{{ route('all_issues') }}" class="btn rounded-pill btn-primary waves-effect waves-light">All Issues</a>
+                                <a href="{{ Route('add_issue_page') }}" class="btn rounded-pill btn-primary waves-effect waves-light">Add Issue</a>
                             </div>
                             <div class="table-responsive text-nowrap">
                                 <table class="table">
@@ -66,7 +66,7 @@
                                                 <td>{{ $issue->scale }}</td>
                                                 <td>{{ $issue->company ? $issue->company->company_name : 'N/A' }}</td>
                                                 <td>{{ $issue->time_duration }}</td>
-                                                <td>{{ $issue->issue_date }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($issue->created_at)->format('Y-m-d') }}</td>
                                                 <td>{{ $issue->status }}</td>
                                                 <td>{{ $issue->azure_status }}</td>
                                                 <td>

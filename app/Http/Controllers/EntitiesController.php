@@ -12,7 +12,6 @@ class EntitiesController extends Controller
      */
     public function index()
     {
-
     }
 
     /**
@@ -37,7 +36,7 @@ class EntitiesController extends Controller
     public function show(string $id)
     {
         $entity = Entity::findOrFail($id);
-        $sectors = $entity->sectors()->paginate(12);
+        $sectors = $entity->sectors()->paginate(10);
         return view('pages.show_entity', compact('entity', 'sectors'));
     }
 
