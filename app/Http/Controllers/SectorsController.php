@@ -46,8 +46,9 @@ class SectorsController extends Controller
     public function edit(string $id)
     {
         if (Auth::user()->role === 'Admin') {
-            $sectors = Sector::find($id);
-            return view('pages.edit_sector', compact('sectors'));
+            $sectors = Sector::with('entity')->findOrFail($id);
+            $entityId = $sectors->entity_id;
+            return view('pages.edit_sector', compact('sectors', 'entityId'));
         } else {
             abort(403, 'Unauthorized Access');
         }
