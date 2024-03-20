@@ -70,15 +70,15 @@
                                                 <td>{{ $issue->status }}</td>
                                                 <td>{{ $issue->azure_status }}</td>
                                                 <td>
+                                                    <a href="{{ Route('edit_issue', $issue->issue_id) }}" class="badge btn rounded-pill btn-outline-dark waves-effect">
+                                                        <i class="mdi mdi-pencil-outline me-1"></i> Edit
+                                                    </a>
                                                     @if (Auth::user()->role === 'Admin')
-                                                        <a href="{{ Route('edit_issue', $issue->issue_id) }}" class="badge btn rounded-pill btn-outline-dark waves-effect">
-                                                            <i class="mdi mdi-pencil-outline me-1"></i> Edit
-                                                        </a>
                                                         <a href="{{ Route('delete_issue', $issue->issue_id) }}" class="badge btn rounded-pill btn-danger waves-effect waves-light" onclick="return confirm('Are You Sure!')">
                                                             <i class="mdi mdi-trash-can-outline me-1"></i> Delete
                                                         </a>
                                                     @else
-                                                        <span class="badge rounded-pill bg-danger">Not Authorized</span>
+                                                        <span class="badge rounded-pill bg-danger">Delete Unavailable</span>
                                                     @endif
                                                 </td>
                                             </tr>

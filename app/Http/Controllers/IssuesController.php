@@ -75,7 +75,15 @@ class IssuesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $issue          = Issue::find($id);
+        $sectors        = Sector::all();
+        $owners         = IssueOwner::all();
+        $assignees      = IssueAssignee::all();
+        $companies      = Company::all();
+        $scaleOption    = ['Low', 'Medium', 'High'];
+        $statusOption   = ['On Process', 'Finished'];
+        $azureOption    = ['Pending', 'Resolved', 'Closed', 'Not Listed'];
+        return view('pages.edit_issue', compact('issue', 'sectors', 'owners', 'assignees', 'companies', 'scaleOption', 'statusOption', 'azureOption'));
     }
 
     /**
@@ -83,7 +91,28 @@ class IssuesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'issue_description' => 'required|string|max:255',
+            'sector_id'         => 'required|exists:sectors,id',
+            'owner_id'          => 'required|exists:issue_owners,owner_id',
+            'assignee_id'       => 'required|exists:issue_assignees,assignee_id',
+            'company_id'        => 'required|exists:companies,company_id',
+            'scale'             => 'required',
+            'status'            => 'required',
+            'azure_status'      => 'required',
+        ]);
+        $issue = Issue::find($id);
+        $issue->issue_description = $request->issue_description;
+        $issue->sector_id         = $request->sector_id;
+        $issue->owner_id          = $request->owner_id;
+        $issue->assignee_id       = $request->assignee_id;
+        $issue->company_id        = $request->company_id;
+        $issue->scale             = $request->scale;
+        $issue->time_duration     = $request->time_duration;
+        $issue->status            = $request->status;
+        $issue->azure_status      = $request->azure_status;
+        $issue->save();
+        return redirect()->route('issues')->with('message', 'Issue Updated Successfully');
     }
 
     /**
@@ -91,6 +120,12 @@ class IssuesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        if(Auth::user()->role === 'Admin'){
+            $issue = Issue::find($id);
+            $issue->delete();
+            return redirect()->route('issues')->with('message', 'Issue Updated Successfully');
+        }else{
+            abort(403, 'Unauthorized Access');
+        }
     }
 }
