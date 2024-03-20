@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('issues', function (Blueprint $table) {
-            $table->unsignedBigInteger('sector_id')->nullable()->after('id'); // Use after('id') to place it after the id column if you prefer
-            $table->foreign('sector_id')->references('id')->on('sectors')->onDelete('set null'); // Adjust onDelete behavior as needed
+            $table->timestamp('resolved_at')->nullable();
         });
     }
 

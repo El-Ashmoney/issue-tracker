@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('time_duration')->nullable();
             $table->date('issue_date');
             $table->enum('status', ['On Process', 'Finished']);
-            $table->enum('azure_status', ['Pending', 'Resolved', 'Closed']);
+            $table->enum('azure_status', ['Pending', 'Resolved', 'Closed', 'Not Listed']);
 
             $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');
             $table->foreign('sector_id')->references('id')->on('sectors')->onDelete('cascade');
