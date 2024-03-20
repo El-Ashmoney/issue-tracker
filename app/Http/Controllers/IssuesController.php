@@ -18,7 +18,7 @@ class IssuesController extends Controller
      */
     public function index()
     {
-        $issues = Issue::with(['creator', 'owner', 'assignee', 'company'])->paginate(12);
+        $issues = Issue::where('created_by', Auth::id())->with(['creator', 'owner', 'assignee', 'company'])->paginate(12);
         return view('pages.issues', compact('issues'));
     }
 

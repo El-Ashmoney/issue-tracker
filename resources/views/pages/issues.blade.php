@@ -43,7 +43,6 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
                                             <th>Issue</th>
                                             <th>Owner</th>
                                             <th>Assignee</th>
@@ -59,7 +58,6 @@
                                     <tbody class="table-border-bottom-0">
                                         @foreach ($issues as $issue)
                                             <tr class="table-default">
-                                                <td>{{ $issue->issue_id }}</td>
                                                 <td>{{ $issue->issue_description }}</td>
                                                 <td>{{ $issue->owner ? $issue->owner->owner_name : 'N/A' }}</td>
                                                 <td>{{ $issue->assignee ? $issue->assignee->assignee_name : 'N/A' }}</td>
@@ -70,15 +68,17 @@
                                                 <td>{{ $issue->status }}</td>
                                                 <td>{{ $issue->azure_status }}</td>
                                                 <td>
-                                                    <a href="{{ Route('edit_issue', $issue->issue_id) }}" class="badge btn rounded-pill btn-outline-dark waves-effect">
-                                                        <i class="mdi mdi-pencil-outline me-1"></i> Edit
-                                                    </a>
+                                                    @if(Auth::user()->role === 'User' && $issue->status === 'Finished')
+                                                        <span class="badge rounded-pill bg-danger">Edit & Delete Unavailable</span>
+                                                    @else
+                                                        <a href="{{ Route('edit_issue', $issue->issue_id) }}" class="badge btn rounded-pill btn-outline-dark waves-effect">
+                                                            <i class="mdi mdi-pencil-outline me-1"></i> Edit
+                                                        </a>
+                                                    @endif
                                                     @if (Auth::user()->role === 'Admin')
                                                         <a href="{{ Route('delete_issue', $issue->issue_id) }}" class="badge btn rounded-pill btn-danger waves-effect waves-light" onclick="return confirm('Are You Sure!')">
                                                             <i class="mdi mdi-trash-can-outline me-1"></i> Delete
                                                         </a>
-                                                    @else
-                                                        <span class="badge rounded-pill bg-danger">Delete Unavailable</span>
                                                     @endif
                                                 </td>
                                             </tr>
