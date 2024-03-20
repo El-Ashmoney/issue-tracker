@@ -101,7 +101,10 @@ class IssuesController extends Controller
             'status'            => 'required',
             'azure_status'      => 'required',
         ]);
-        $issue = Issue::find($id);
+        $issue = Issue::findOrFail($id);
+        if ($request->status === 'Finished' && is_null($issue->resolved_at)) {
+            $issue->resolved_at = now();
+        }
         $issue->issue_description = $request->issue_description;
         $issue->sector_id         = $request->sector_id;
         $issue->owner_id          = $request->owner_id;
@@ -120,11 +123,11 @@ class IssuesController extends Controller
      */
     public function destroy(string $id)
     {
-        if(Auth::user()->role === 'Admin'){
+        if (Auth::user()->role === 'Admin') {
             $issue = Issue::find($id);
             $issue->delete();
             return redirect()->route('issues')->with('message', 'Issue Updated Successfully');
-        }else{
+        } else {
             abort(403, 'Unauthorized Access');
         }
     }

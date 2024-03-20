@@ -29,7 +29,18 @@ class Issue extends Model
         'issue_date',
         'status',
         'azure_status',
+        'resolved_at',
     ];
+
+    protected $appends = ['time_duration'];
+    public function getTimeDurationAttribute()
+    {
+        if ($this->resolved_at) {
+            return $this->created_at->diffForHumans($this->resolved_at, true, true, 2);
+        }
+        return 'Not resolved yet';
+    }
+
 
     public function company()
     {
@@ -46,7 +57,8 @@ class Issue extends Model
         return $this->belongsTo(IssueAssignee::class, 'assignee_id', 'assignee_id');
     }
 
-    public function creator(){
+    public function creator()
+    {
         return $this->belongsTo('App\Models\User', 'created_by');
     }
 
@@ -54,5 +66,4 @@ class Issue extends Model
     {
         return $this->belongsTo(Sector::class, 'sector_id');
     }
-
 }
