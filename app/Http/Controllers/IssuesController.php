@@ -20,14 +20,16 @@ class IssuesController extends Controller
     {
         $issues = Issue::where('created_by', Auth::id())->with(['creator', 'owner', 'assignee', 'company'])->paginate(12);
         $sectors = Sector::all();
-        return view('pages.issues', compact('issues', 'sectors'));
+        $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
+        return view('pages.issues', compact('issues', 'sectors', 'sectorsWithEntities'));
     }
 
     public function issues()
     {
         $issues = Issue::with(['creator', 'owner', 'assignee', 'company'])->paginate(12);
         $sectors = Sector::all();
-        return view('pages.all_issues', compact('issues', 'sectors'));
+        $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
+        return view('pages.all_issues', compact('issues', 'sectors', 'sectorsWithEntities'));
     }
 
     public function create_page()
@@ -57,9 +59,9 @@ class IssuesController extends Controller
 
         // Fetch sectors for dropdown
         $sectors = Sector::all();
-
+        $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
         // Return the view with optional pre-filled data
-        return view('pages.add_searched_issue_page', compact('sectors', 'query', 'selectedSectorId', 'owners', 'assignees', 'companies', 'scaleOption', 'statusOption', 'azureOption'));
+        return view('pages.add_searched_issue_page', compact('sectors', 'query', 'selectedSectorId', 'owners', 'assignees', 'companies', 'scaleOption', 'statusOption', 'azureOption', 'sectorsWithEntities'));
     }
 
     /**
@@ -105,7 +107,8 @@ class IssuesController extends Controller
         $scaleOption    = ['Low', 'Medium', 'High'];
         $statusOption   = ['On Process', 'Finished'];
         $azureOption    = ['Pending', 'Resolved', 'Closed', 'Not Listed'];
-        return view('pages.edit_issue', compact('issue', 'sectors', 'owners', 'assignees', 'companies', 'scaleOption', 'statusOption', 'azureOption'));
+        $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
+        return view('pages.edit_issue', compact('issue', 'sectors', 'owners', 'assignees', 'companies', 'scaleOption', 'statusOption', 'azureOption', 'sectorsWithEntities'));
     }
 
     /**

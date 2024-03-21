@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Entity;
+use App\Models\Sector;
 use Illuminate\Http\Request;
 
 class EntitiesController extends Controller
@@ -37,7 +38,8 @@ class EntitiesController extends Controller
     {
         $entity = Entity::findOrFail($id);
         $sectors = $entity->sectors()->paginate(10);
-        return view('pages.show_entity', compact('entity', 'sectors'));
+        $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
+        return view('pages.show_entity', compact('entity', 'sectors', 'sectorsWithEntities'));
     }
 
     /**

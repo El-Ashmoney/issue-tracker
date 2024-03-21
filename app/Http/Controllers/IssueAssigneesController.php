@@ -16,7 +16,8 @@ class IssueAssigneesController extends Controller
     {
         $issue_assignees = IssueAssignee::paginate(12);
         $sectors = Sector::all();
-        return view('pages.issue_assaignees', compact('issue_assignees', 'sectors'));
+        $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
+        return view('pages.issue_assaignees', compact('issue_assignees', 'sectors', 'sectorsWithEntities'));
     }
 
     /**
@@ -50,7 +51,8 @@ class IssueAssigneesController extends Controller
     {
         if (Auth::user()->role === 'Admin') {
             $issue_assignee = IssueAssignee::find($id);
-            return view('pages.edit_issue_assignee', compact('issue_assignee'));
+            $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
+            return view('pages.edit_issue_assignee', compact('issue_assignee', 'sectorsWithEntities'));
         } else {
             abort(403, 'Unauthorized Access');
         }

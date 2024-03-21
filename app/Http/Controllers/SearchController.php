@@ -43,7 +43,8 @@ class SearchController extends Controller
         $sectors = Sector::all();
         $selectedSectorName = $sectors->firstWhere('id', $sectorId)->name ?? 'Default Sector Name';
         $issuePagination = Issue::paginate(12);
-        return view('pages.search_results', compact('issues', 'sectors', 'query', 'sectorId', 'selectedSectorName', 'issuePagination'));
+        $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
+        return view('pages.search_results', compact('issues', 'sectors', 'query', 'sectorId', 'selectedSectorName', 'issuePagination', 'sectorsWithEntities'));
     }
 
 

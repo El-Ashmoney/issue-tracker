@@ -12,8 +12,12 @@
                 <div class="me-2">
                     <select class="form-select form-control border-0 shadow-none bg-white rounded-pill" name="sector_id" required  id="exampleFormControlSelect1" aria-label="Default select example">
                         <option value="">Select Sector</option>
-                        @foreach ($sectors as $sector)
-                            <option value="{{ $sector->id }}">{{ $sector->name }}</option>
+                        @foreach ($sectorsWithEntities as $entityName => $sectors)
+                            <optgroup label="{{ $entityName }}">
+                                @foreach ($sectors as $sector)
+                                    <option value="{{ $sector->id }}">{{ $sector->name }}</option>
+                                @endforeach
+                            </optgroup>
                         @endforeach
                     </select>
                 </div>

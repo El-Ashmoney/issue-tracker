@@ -16,7 +16,8 @@ class UsersController extends Controller
     {
         $users = User::paginate(12);
         $sectors = Sector::all();
-        return view('pages.users', compact('users', 'sectors'));
+        $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
+        return view('pages.users', compact('users', 'sectors', 'sectorsWithEntities'));
     }
 
     /**
@@ -34,7 +35,8 @@ class UsersController extends Controller
     {
         if (Auth::user()->role === 'Admin') {
             $user = User::find($id);
-            return view('pages.edit_user', compact('user'));
+            $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
+            return view('pages.edit_user', compact('user', 'sectorsWithEntities'));
         } else {
             abort(403, 'Unauthorized Access');
         }

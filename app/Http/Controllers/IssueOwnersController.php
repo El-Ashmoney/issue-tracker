@@ -16,7 +16,8 @@ class IssueOwnersController extends Controller
     {
         $issue_owners = IssueOwner::paginate(12);
         $sectors = Sector::all();
-        return view('pages.issue_owners', compact('issue_owners', 'sectors'));
+        $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
+        return view('pages.issue_owners', compact('issue_owners', 'sectors', 'sectorsWithEntities'));
     }
 
     /**
@@ -34,7 +35,8 @@ class IssueOwnersController extends Controller
     {
         if (Auth::user()->role === 'Admin') {
             $issue_owners = IssueOwner::find($id);
-            return view('pages.edit_issue_owner', compact('issue_owners'));
+            $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
+            return view('pages.edit_issue_owner', compact('issue_owners', 'sectorsWithEntities'));
         } else {
             abort(403, 'Unauthorized Access');
         }

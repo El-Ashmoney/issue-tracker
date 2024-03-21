@@ -16,7 +16,8 @@ class CompaniesController extends Controller
     {
         $companies = Company::paginate(12);
         $sectors = Sector::all();
-        return view('pages.companies', compact('companies', 'sectors'));
+        $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
+        return view('pages.companies', compact('companies', 'sectors', 'sectorsWithEntities'));
     }
 
     /**
@@ -34,7 +35,8 @@ class CompaniesController extends Controller
     {
         if (Auth::user()->role === 'Admin') {
             $companies = Company::find($id);
-            return view('pages.edit_company', compact('companies'));
+            $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
+            return view('pages.edit_company', compact('companies', 'sectorsWithEntities'));
         } else {
             abort(403, 'Unauthorized Access');
         }

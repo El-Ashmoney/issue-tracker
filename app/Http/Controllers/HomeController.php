@@ -25,7 +25,8 @@ class HomeController extends Controller
         $entities = Entity::with('sectors')->get();
         $sectors = Sector::all();
         $issues = Issue::all();
-        return view('pages.index', compact('entities', 'sectors', 'issues'));
+        $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
+        return view('pages.index', compact('entities', 'sectors', 'issues', 'sectorsWithEntities'));
     }
 
     /**
