@@ -37,7 +37,7 @@
                             </div>
                         @endif
                         <div class="card-margin card">
-                            <h5 class="display-4 card-header text-center text-uppercase">All Issues</h5>
+                            <h5 class="scroll-pt-0 display-4 card-header text-center text-uppercase">All Issues</h5>
                             <div class="flex justify-between items-center rounded-full" style="margin: 10px 20px">
                                 <a href="" class="btn rounded-pill btn-primary waves-effect waves-light">Download Issues Report</a>
                                 <a href="{{ Route('add_issue_page') }}" class="btn rounded-pill btn-primary waves-effect waves-light">Add Issue</a>

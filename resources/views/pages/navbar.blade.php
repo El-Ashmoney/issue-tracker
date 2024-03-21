@@ -10,27 +10,25 @@
         <form action="{{ route('search') }}" method="GET" class="mt-6">
             @csrf
             <div class="flex">
-                <div class="form-floating form-floating-outline">
-                    <select class="form-select" name="sector_id" required  id="exampleFormControlSelect1" aria-label="Default select example">
-                        <option value="">Which Sector</option>
+                <div>
+                    <select class="form-select form-control border-0 shadow-none bg-white" name="sector_id" required  id="smallSelect" aria-label="Default select example">
+                        <option value="">Select Sector</option>
                         @foreach ($sectors as $sector)
                             <option value="{{ $sector->id }}">{{ $sector->name }}</option>
                         @endforeach
                     </select>
-                    <label for="exampleFormControlSelect1">Select Sector <span class="mdi mdi-arrow-down-right"></span></label>
                 </div>
                 <div class="navbar-nav align-items-center">
-                    <div class="nav-item d-flex align-items-center">
-                        &nbsp;<i class="mdi mdi-magnify mdi-24px lh-0"></i>
+                    <div class="nav-item d-flex align-items-center me-2">
                         <input
-                            type="search"
-                            id="search-input"
-                            name="query"
-                            class="w-64 form-control border-0 shadow-none bg-body"
-                            placeholder="Search for exist or add new"
-                            aria-label="Search..." />
+                        type="search"
+                        id="search-input"
+                        name="query"
+                        class="w-64 form-control border-0 shadow-none bg-white"
+                        placeholder="Search for exist or add new"
+                        aria-label="Search" />
                     </div>
-                    <button type="submit" class="update-btn btn btn-primary">Search</button>
+                    <button type="submit" class="update-btn btn-xs rounded-pill btn btn-primary"><i class="mdi mdi-magnify mdi-24px lh-0"></i>&nbsp;Search</button>
                 </div>
             </div>
         </form>
