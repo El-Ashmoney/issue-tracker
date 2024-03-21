@@ -149,7 +149,7 @@
                                 <p class="mb-0">Your sales performance is 45% 😎 better compared to last month</p>
                             </div>
                             <div class="d-grid mt-3 mt-md-4">
-                                <button class="btn btn-primary" type="button">Details</button>
+                                <button class="update-btn btn btn-primary" type="button">Details</button>
                             </div>
                         </div>
                     </div>

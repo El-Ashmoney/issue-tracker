@@ -19,7 +19,8 @@ class IssuesController extends Controller
     public function index()
     {
         $issues = Issue::where('created_by', Auth::id())->with(['creator', 'owner', 'assignee', 'company'])->paginate(12);
-        return view('pages.issues', compact('issues'));
+        $sectors = Sector::all();
+        return view('pages.issues', compact('issues', 'sectors'));
     }
 
     public function issues()
@@ -38,6 +39,26 @@ class IssuesController extends Controller
         $statusOption   = ['On Process', 'Finished'];
         $azureOption    = ['Pending', 'Resolved', 'Closed', 'Not Listed'];
         return view('pages.add_issue', compact('sectors', 'owners', 'assignees', 'companies', 'scaleOption', 'statusOption', 'azureOption'));
+    }
+
+    public function createFromSearch(Request $request)
+    {
+        $sectors        = Sector::all();
+        $owners         = IssueOwner::all();
+        $assignees      = IssueAssignee::all();
+        $companies      = Company::all();
+        $scaleOption    = ['Low', 'Medium', 'High'];
+        $statusOption   = ['On Process', 'Finished'];
+        $azureOption    = ['Pending', 'Resolved', 'Closed', 'Not Listed'];
+
+        $query = $request->input('query');
+        $selectedSectorId = $request->input('sector_id');
+
+        // Fetch sectors for dropdown
+        $sectors = Sector::all();
+
+        // Return the view with optional pre-filled data
+        return view('pages.add_searched_issue_page', compact('sectors', 'query', 'selectedSectorId', 'owners', 'assignees', 'companies', 'scaleOption', 'statusOption', 'azureOption'));
     }
 
     /**

@@ -8,6 +8,7 @@ use App\Http\Controllers\EntitiesController;
 use App\Http\Controllers\IssueOwnersController;
 use App\Http\Controllers\IssueAssigneesController;
 use App\Http\Controllers\IssuesController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SectorsController;
 
 /*
@@ -69,4 +70,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/edit_sector/{id}', [SectorsController::class, 'edit'])->name('edit_sector');
     Route::post('/update_sector/{id}', [SectorsController::class, 'update'])->name('update_sector');
     Route::post('/delete_sector/{id}', [SectorsController::class, 'destroy'])->name('delete_sector');
+
+    // Search Route Controller
+    Route::get('/search', [SearchController::class, 'search'])->name('search');
+    Route::get('/add_issue', [IssuesController::class, 'createFromSearch'])->name('add_searched_issue_page');
 });

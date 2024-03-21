@@ -28,11 +28,11 @@
                     <!-- Contextual Classes -->
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <div class="card-margin card">
-                            <h5 class="pb-0	display-4 card-header text-center text-uppercase">Add Issue</h5>
+                            <h5 class="pb-0	display-4 card-header text-center text-uppercase">Add Issue: {{ $query }}</h5>
                             <div class="col-xl">
                                 <div class="card">
                                     <div class="card-body">
-                                        <form action="{{ Route('add_issue') }}" method="POST">
+                                        {{-- <form action="{{ Route('add_issue') }}" method="POST">
                                             @csrf
                                             <div class="form-floating form-floating-outline mb-4">
                                                 <textarea id="basic-default-issue" class="form-control" placeholder="Descripe the issue" style="height: 60px" name="issue_description"></textarea>
@@ -104,7 +104,7 @@
                                             <div class="flex justify-center">
                                                 <button type="submit" class="update-btn rounded-pill btn btn-primary waves-effect waves-light">Add Issue</button>
                                             </div>
-                                        </form>
+                                        </form> --}}
                                     </div>
                                 </div>
                             </div>

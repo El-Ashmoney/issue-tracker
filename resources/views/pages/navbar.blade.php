@@ -7,16 +7,34 @@
 
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
         <!-- Search -->
-        <div class="navbar-nav align-items-center">
-            <div class="nav-item d-flex align-items-center">
-                <i class="mdi mdi-magnify mdi-24px lh-0"></i>
-                <input
-                    type="text"
-                    class="form-control border-0 shadow-none bg-body"
-                    placeholder="Search..."
-                    aria-label="Search..." />
+        <form action="{{ route('search') }}" method="GET">
+            @csrf
+            <div class="flex">
+                <div class="form-floating form-floating-outline">
+                    <select class="form-select" name="sector_id" required  id="exampleFormControlSelect1" aria-label="Default select example">
+                        <option value="">Which Sector</option>
+                        @foreach ($sectors as $sector)
+                            <option value="{{ $sector->id }}">{{ $sector->name }}</option>
+                        @endforeach
+                    </select>
+                    <label for="exampleFormControlSelect1">Select Sector <span class="mdi mdi-arrow-down-right"></span></label>
+                </div>
+                <div class="navbar-nav align-items-center">
+                    <div class="nav-item d-flex align-items-center">
+                        &nbsp;<i class="mdi mdi-magnify mdi-24px lh-0"></i>
+                        <input
+                            type="search"
+                            id="search-input"
+                            name="query"
+                            class="form-control border-0 shadow-none bg-body"
+                            placeholder="Search for exist or add new"
+                            aria-label="Search..." />
+                    </div>
+                    <button type="submit" class="update-btn btn btn-primary">Search</button>
+                </div>
             </div>
-        </div>
+        </form>
+
         <!-- /Search -->
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">

@@ -7,6 +7,7 @@ use App\Models\Issue;
 
 
 use App\Models\Entity;
+use App\Models\Sector;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -22,7 +23,9 @@ class HomeController extends Controller
     public function index()
     {
         $entities = Entity::with('sectors')->get();
-        return view('pages.index', compact('entities'));
+        $sectors = Sector::all();
+        $issues = Issue::all();
+        return view('pages.index', compact('entities', 'sectors', 'issues'));
     }
 
     /**
