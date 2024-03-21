@@ -32,17 +32,19 @@
                             <div class="col-xl">
                                 <div class="card">
                                     <div class="card-body">
-                                        {{-- <form action="{{ Route('add_issue') }}" method="POST">
+                                        <form action="{{ Route('add_issue') }}" method="POST">
                                             @csrf
                                             <div class="form-floating form-floating-outline mb-4">
-                                                <textarea id="basic-default-issue" class="form-control" placeholder="Descripe the issue" style="height: 60px" name="issue_description"></textarea>
+                                                <textarea id="basic-default-issue" class="form-control" placeholder="Descripe the issue" style="height: 60px" name="issue_description">{{ $query }}</textarea>
                                                 <label for="basic-default-issue">Issue</label>
                                             </div>
                                             <div class="form-floating form-floating-outline mb-4">
                                                 <select class="form-select" name="sector_id" id="exampleFormControlSelect1" aria-label="Default select example">
                                                     <option selected="">Which Sector</option>
                                                     @foreach ($sectors as $sector)
-                                                        <option value="{{ $sector->id }}">{{ $sector->name }}</option>
+                                                        <option value="{{ $sector->id }}" {{ (old('sector_id', $selectedSectorId) == $sector->id) ? 'selected' : '' }}>
+                                                            {{ $sector->name }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                                 <label for="exampleFormControlSelect1">Select Sector <span class="mdi mdi-arrow-down-right"></span></label>
@@ -104,7 +106,7 @@
                                             <div class="flex justify-center">
                                                 <button type="submit" class="update-btn rounded-pill btn btn-primary waves-effect waves-light">Add Issue</button>
                                             </div>
-                                        </form> --}}
+                                        </form>
                                     </div>
                                 </div>
                             </div>

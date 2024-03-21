@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sector;
 use Illuminate\Http\Request;
 use App\Models\IssueAssignee;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,8 @@ class IssueAssigneesController extends Controller
     public function index()
     {
         $issue_assignees = IssueAssignee::paginate(12);
-        return view('pages.issue_assaignees', compact('issue_assignees'));
+        $sectors = Sector::all();
+        return view('pages.issue_assaignees', compact('issue_assignees', 'sectors'));
     }
 
     /**

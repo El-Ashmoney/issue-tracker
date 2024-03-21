@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Sector;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,8 +15,8 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::paginate(12);
-        // $users_count = User::count();
-        return view('pages.users', compact('users'));
+        $sectors = Sector::all();
+        return view('pages.users', compact('users', 'sectors'));
     }
 
     /**

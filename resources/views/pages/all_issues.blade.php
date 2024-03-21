@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+@php
+    use Illuminate\Support\Str;
+@endphp
 <html
     lang="en"
     class="light-style layout-menu-fixed layout-compact"
@@ -37,7 +40,7 @@
                             <h5 class="display-4 card-header text-center text-uppercase">All Issues</h5>
                             <div class="flex justify-between items-center rounded-full" style="margin: 10px 20px">
                                 <a href="" class="btn rounded-pill btn-primary waves-effect waves-light">Download Issues Report</a>
-                                <a href="" class="btn rounded-pill btn-primary waves-effect waves-light">Add Issue</a>
+                                <a href="{{ Route('add_issue_page') }}" class="btn rounded-pill btn-primary waves-effect waves-light">Add Issue</a>
                             </div>
                             <div class="table-responsive text-nowrap">
                                 <table class="table">
@@ -46,6 +49,7 @@
                                             <th>ID</th>
                                             <th>Created By</th>
                                             <th>Issue</th>
+                                            <th>Sector</th>
                                             <th>Owner</th>
                                             <th>Assignee</th>
                                             <th>Scale</th>
@@ -62,7 +66,9 @@
                                             <tr class="table-default">
                                                 <td>{{ $issue->issue_id }}</td>
                                                 <td>{{ $issue->creator ? $issue->creator->username : 'N/A' }}</td>
-                                                <td>{{ $issue->issue_description }}</td>
+                                                <td>{{ Str::limit($issue->issue_description, 30, '...') }}</td>
+                                                {{-- <td>{{ $issue->issue_description }}</td> --}}
+                                                <td>{{ $issue->sector->name }}</td>
                                                 <td>{{ $issue->owner ? $issue->owner->owner_name : 'N/A' }}</td>
                                                 <td>{{ $issue->assignee ? $issue->assignee->assignee_name : 'N/A' }}</td>
                                                 <td>{{ $issue->scale }}</td>

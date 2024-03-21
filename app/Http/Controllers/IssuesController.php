@@ -26,7 +26,8 @@ class IssuesController extends Controller
     public function issues()
     {
         $issues = Issue::with(['creator', 'owner', 'assignee', 'company'])->paginate(12);
-        return view('pages.all_issues', compact('issues'));
+        $sectors = Sector::all();
+        return view('pages.all_issues', compact('issues', 'sectors'));
     }
 
     public function create_page()

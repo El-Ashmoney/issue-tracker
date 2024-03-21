@@ -34,10 +34,10 @@
                             </div>
                         @endif
                         <div class="card-margin card">
-                            <h5 class="display-4 card-header text-center text-uppercase">Search Results</h5>
+                            <h5 class="display-4 card-header text-center text-uppercase">Search Results For: {{ $query ?: $selectedSectorName }}</h5>
                             <div class="flex justify-between items-center rounded-full" style="margin: 10px 20px">
                                 <a href="" class="btn rounded-pill btn-primary waves-effect waves-light">Download Issues Report</a>
-                                <a href="" class="btn rounded-pill btn-primary waves-effect waves-light">Add Issue</a>
+                                <a href="{{ Route('add_issue_page') }}" class="btn rounded-pill btn-primary waves-effect waves-light">Add Issue</a>
                             </div>
                             <div class="table-responsive text-nowrap">
                                 <table class="table">
@@ -89,32 +89,32 @@
                                 </table>
                             </div>
                         </div>
-                        {{-- @if ($issues->lastPage() > 1)
+                        @if ($issuePagination->lastPage() > 1)
                             <nav aria-label="Page navigation">
                                 <ul class="pagination justify-content-center">
                                     {{-- Previous Page Link --}}
-                                    {{-- <li class="page-item {{ ($issues->currentPage() == 1) ? ' disabled' : '' }}">
-                                        <a class="page-link waves-effect" href="{{ $issues->previousPageUrl() }}"><i class="tf-icon mdi mdi-chevron-double-left"></i></a>
-                                    </li> --}}
+                                    <li class="page-item {{ ($issuePagination->currentPage() == 1) ? ' disabled' : '' }}">
+                                        <a class="page-link waves-effect" href="{{ $issuePagination->previousPageUrl() }}"><i class="tf-icon mdi mdi-chevron-double-left"></i></a>
+                                    </li>
 
                                     {{-- Pagination Elements --}}
-                                    {{-- @php
-                                        $start = max($issues->currentPage() - 2, 1);
-                                        $end = min(max($issues->currentPage() + 2, 5), $issues->lastPage());
+                                    @php
+                                        $start = max($issuePagination->currentPage() - 2, 1);
+                                        $end = min(max($issuePagination->currentPage() + 2, 5), $issuePagination->lastPage());
                                     @endphp --}}
                                     {{-- @for ($i = $start; $i <= $end; $i++)
-                                        <li class="page-item {{ ($issues->currentPage() == $i) ? ' active' : '' }}">
-                                            <a class="page-link" href="{{ $issues->url($i) }}">{{ $i }}</a>
+                                        <li class="page-item {{ ($issuePagination->currentPage() == $i) ? ' active' : '' }}">
+                                            <a class="page-link" href="{{ $issuePagination->url($i) }}">{{ $i }}</a>
                                         </li>
-                                    @endfor --}}
+                                    @endfor
 
                                     {{-- Next Page Link --}}
-                                    {{-- <li class="page-item {{ ($issues->currentPage() == $issues->lastPage()) ? ' disabled' : '' }}">
-                                        <a class="page-link waves-effect" href="{{ $issues->nextPageUrl() }}"><i class="tf-icon mdi mdi-chevron-double-right"></i></a>
-                                    </li> --}}
+                                    <li class="page-item {{ ($issuePagination->currentPage() == $issuePagination->lastPage()) ? ' disabled' : '' }}">
+                                        <a class="page-link waves-effect" href="{{ $issuePagination->nextPageUrl() }}"><i class="tf-icon mdi mdi-chevron-double-right"></i></a>
+                                    </li>
                                 </ul>
-                            </nav> --}}
-                        {{-- @endif --}}
+                            </nav>
+                        @endif
                     </div>
                     <!--/ Contextual Classes -->
                 </div>

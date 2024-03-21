@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sector;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,8 @@ class CompaniesController extends Controller
     public function index()
     {
         $companies = Company::paginate(12);
-        return view('pages.companies', compact('companies'));
+        $sectors = Sector::all();
+        return view('pages.companies', compact('companies', 'sectors'));
     }
 
     /**
@@ -62,7 +64,7 @@ class CompaniesController extends Controller
             $companies = Company::find($id);
             $companies->delete();
             return redirect()->route('companies')->with('message', 'Company Deleted Successfully');
-        }else{
+        } else {
             abort(403, 'Unauthorized Access');
         }
     }

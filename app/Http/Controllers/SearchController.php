@@ -29,10 +29,10 @@ class SearchController extends Controller
         $issues = Issue::when($query, function ($q) use ($query) {
             return $q->where('issue_description', 'like', '%' . $query . '%');
         })
-        ->when($sectorId, function ($q) use ($sectorId) { // Use $sectorId directly
-            return $q->where('sector_id', $sectorId);
-        })
-        ->get();
+            ->when($sectorId, function ($q) use ($sectorId) { // Use $sectorId directly
+                return $q->where('sector_id', $sectorId);
+            })
+            ->get();
 
         // Redirect to a form pre-filled with the query and selected sector if no issues found
         if ($issues->isEmpty() && $query) {
@@ -41,7 +41,9 @@ class SearchController extends Controller
 
         // Prepare sectors for dropdown in search results page
         $sectors = Sector::all();
-        return view('pages.search_results', compact('issues', 'sectors', 'query', 'sectorId'));
+        $selectedSectorName = $sectors->firstWhere('id', $sectorId)->name ?? 'Default Sector Name';
+        $issuePagination = Issue::paginate(12);
+        return view('pages.search_results', compact('issues', 'sectors', 'query', 'sectorId', 'selectedSectorName', 'issuePagination'));
     }
 
 

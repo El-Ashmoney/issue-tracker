@@ -7,7 +7,7 @@
 
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
         <!-- Search -->
-        <form action="{{ route('search') }}" method="GET">
+        <form action="{{ route('search') }}" method="GET" class="mt-6">
             @csrf
             <div class="flex">
                 <div class="form-floating form-floating-outline">
@@ -26,7 +26,7 @@
                             type="search"
                             id="search-input"
                             name="query"
-                            class="form-control border-0 shadow-none bg-body"
+                            class="w-64 form-control border-0 shadow-none bg-body"
                             placeholder="Search for exist or add new"
                             aria-label="Search..." />
                     </div>

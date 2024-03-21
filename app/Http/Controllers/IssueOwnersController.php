@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sector;
 use App\Models\IssueOwner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,8 @@ class IssueOwnersController extends Controller
     public function index()
     {
         $issue_owners = IssueOwner::paginate(12);
-        return view('pages.issue_owners', compact('issue_owners'));
+        $sectors = Sector::all();
+        return view('pages.issue_owners', compact('issue_owners', 'sectors'));
     }
 
     /**
