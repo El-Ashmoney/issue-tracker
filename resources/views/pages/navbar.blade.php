@@ -7,11 +7,10 @@
 
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
         <!-- Search -->
-        <form action="{{ route('search') }}" method="GET" class="mt-6">
-            @csrf
+        <form action="{{ route('search') }}" method="GET" id="search-form">
             <div class="flex">
-                <div>
-                    <select class="form-select form-control border-0 shadow-none bg-white" name="sector_id" required  id="smallSelect" aria-label="Default select example">
+                <div class="me-2">
+                    <select class="form-select form-control border-0 shadow-none bg-white rounded-pill" name="sector_id" required  id="exampleFormControlSelect1" aria-label="Default select example">
                         <option value="">Select Sector</option>
                         @foreach ($sectors as $sector)
                             <option value="{{ $sector->id }}">{{ $sector->name }}</option>
@@ -19,20 +18,19 @@
                     </select>
                 </div>
                 <div class="navbar-nav align-items-center">
-                    <div class="nav-item d-flex align-items-center me-2">
+                    <div class="nav-item d-flex align-items-center me-2 bg-white rounded-pill">
                         <input
-                        type="search"
-                        id="search-input"
-                        name="query"
-                        class="w-64 form-control border-0 shadow-none bg-white"
-                        placeholder="Search for exist or add new"
-                        aria-label="Search" />
+                            type="search"
+                            id="search-input"
+                            name="query"
+                            class="w-64 form-control border-0 shadow-none rounded-pill"
+                            placeholder="Search for exist or add new"
+                            aria-label="search" />
                     </div>
-                    <button type="submit" class="update-btn btn-xs rounded-pill btn btn-primary"><i class="mdi mdi-magnify mdi-24px lh-0"></i>&nbsp;Search</button>
                 </div>
+                <button type="submit" class="update-btn btn-xs rounded-pill btn btn-primary"><i class="mdi mdi-magnify mdi-24px lh-0"></i>&nbsp;Search</button>
             </div>
         </form>
-
         <!-- /Search -->
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">

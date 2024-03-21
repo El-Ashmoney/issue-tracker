@@ -10,7 +10,7 @@ let menu, animate;
     // Search
     document.addEventListener('DOMContentLoaded', function () {
         const searchInput = document.getElementById('search-input');
-        const form = document.querySelector('form'); // Assuming there's only one form or you can add an id/class to be more specific
+        const form = document.getElementById('search-form'); // Assuming there's only one form or you can add an id/class to be more specific
 
         form.addEventListener('submit', function (event) {
             event.preventDefault(); // Prevent the form from submitting traditionally
