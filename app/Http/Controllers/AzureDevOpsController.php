@@ -10,7 +10,7 @@ class AzureDevOpsController extends Controller
 {
     public function getWorkItem($workItemId)
     {
-        $personalAccessToken = 'afusblapcqkcxzi4avuzchsgl4uxfy274xgd2757kdeevxcstpia';
+        $personalAccessToken = env('AZURE_DEVOPS_PAT');
         $organization = 'ExProtectionProduects';
         $project = 'SRACO';
         // $workItemID = '56052';
@@ -25,13 +25,9 @@ class AzureDevOpsController extends Controller
                     'Accept' => 'application/json',
                 ],
             ]);
-
             $workItem = json_decode($response->getBody()->getContents(), true);
-
-            // Process the $workItem as needed
             return response()->json($workItem);
         } catch (GuzzleException $e) {
-            // Handle the error appropriately
             return response()->json(['error' => 'Request failed: ' . $e->getMessage()], 500);
         }
     }
