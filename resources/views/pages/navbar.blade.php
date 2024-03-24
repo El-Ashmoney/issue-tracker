@@ -32,7 +32,7 @@
                             aria-label="search" />
                     </div>
                 </div>
-                <button type="submit" class="update-btn btn-xs rounded-pill btn btn-primary"><i class="mdi mdi-magnify mdi-24px lh-0"></i>&nbsp;Search</button>
+                <button type="submit" class="update-btn btn-xs rounded-pill btn btn-primary"><i class="mdi mdi-magnify mdi-20px lh-0 me-1"></i>Search</button>
             </div>
         </form>
         <!-- /Search -->
