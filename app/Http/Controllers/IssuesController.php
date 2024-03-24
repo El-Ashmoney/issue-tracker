@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Company;
 use App\Models\User;
 use App\Models\Issue;
-use App\Models\IssueAssignee;
-use App\Models\IssueOwner;
 use App\Models\Sector;
+use App\Models\Company;
+use App\Models\IssueOwner;
 use Illuminate\Http\Request;
+use App\Models\IssueAssignee;
 use Illuminate\Support\Facades\Auth;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Color;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class IssuesController extends Controller
 {
@@ -93,6 +98,84 @@ class IssuesController extends Controller
         $issue->azure_status      = $request->azure_status;
         $issue->save();
         return redirect()->route('issues')->with('message', 'Issue Added Successfully');
+    }
+
+    public function exportIssues()
+    {
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Set the headings
+        $sheet->setCellValue('A1', 'ID');
+        $sheet->setCellValue('B1', 'Created By');
+        $sheet->setCellValue('C1', 'Issue Description');
+        $sheet->setCellValue('D1', 'Sector');
+        $sheet->setCellValue('E1', 'Issue Owner');
+        $sheet->setCellValue('F1', 'Issue Assignee');
+        $sheet->setCellValue('G1', 'Company');
+        $sheet->setCellValue('H1', 'Scale');
+        $sheet->setCellValue('I1', 'Time Duration');
+        $sheet->setCellValue('J1', 'Created At');
+        $sheet->setCellValue('K1', 'Issue Status');
+        $sheet->setCellValue('L1', 'Azure Status');
+
+        $headingStyle = [
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => [
+                    'argb' => 'FF002060',
+                ],
+            ],
+            'font' => [
+                'bold' => true,
+                'color' => ['argb' => Color::COLOR_WHITE],
+            ],
+        ];
+        $sheet->getStyle('A1:L1')->applyFromArray($headingStyle);
+
+        // Retrieve issues from database
+        $issues = Issue::with(['creator', 'owner', 'assignee', 'company', 'sector'])->get();
+        $row = 2;
+
+        // Iterate through the issues to fill the spreadsheet
+        foreach ($issues as $issue) {
+            $sheet->setCellValue('A' . $row, $issue->issue_id);
+            $sheet->setCellValue('B' . $row, $issue->creator->username);
+            $sheet->setCellValue('C' . $row, $issue->issue_description);
+            $sheet->setCellValue('D' . $row, $issue->sector->name);
+            $sheet->setCellValue('E' . $row, $issue->owner->owner_name);
+            $sheet->setCellValue('F' . $row, $issue->assignee->assignee_name);
+            $sheet->setCellValue('G' . $row, $issue->company->company_name);
+            $sheet->setCellValue('H' . $row, $issue->scale);
+            $sheet->setCellValue('I' . $row, $issue->time_duration);
+            $sheet->setCellValue('J' . $row, $issue->created_at ? $issue->created_at->format('Y-m-d') : '');
+            $sheet->setCellValue('K' . $row, $issue->status);
+            $sheet->setCellValue('L' . $row, $issue->azure_status);
+            $row++;
+        }
+
+        // Redirect output to a client’s web browser (Excel5)
+        $writer = new Xlsx($spreadsheet);
+
+        $fileName = "issues_export_" . date('Ymd') . ".xlsx";
+        $temp_file = tempnam(sys_get_temp_dir(), $fileName);
+
+        // Create a StreamedResponse to download file
+        $response = new StreamedResponse(
+            function () use ($writer, $temp_file) {
+                $writer->save($temp_file);
+                readfile($temp_file);
+                unlink($temp_file);
+            },
+            200,
+            [
+                'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'Content-Disposition' => 'attachment;filename="' . $fileName . '"',
+                'Cache-Control' => 'max-age=0',
+            ]
+        );
+
+        return $response;
     }
 
     /**
