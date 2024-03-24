@@ -13,11 +13,8 @@ class AzureDevOpsController extends Controller
         $personalAccessToken = env('AZURE_DEVOPS_PAT');
         $organization = 'ExProtectionProduects';
         $project = 'SRACO';
-        // $workItemID = '56052';
-        $apiVersion = '7.1'; // Or another version if necessary
-
+        $apiVersion = '7.1';
         $client = new Client();
-
         try {
             $response = $client->request('GET', "https://dev.azure.com/{$organization}/{$project}/_apis/wit/workitems/{$workItemId}?api-version={$apiVersion}", [
                 'headers' => [
