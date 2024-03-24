@@ -14,7 +14,7 @@ class IssueOwnersController extends Controller
      */
     public function index()
     {
-        $issue_owners = IssueOwner::paginate(12);
+        $issue_owners = IssueOwner::paginate(10);
         $sectors = Sector::all();
         $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
         return view('pages.issue_owners', compact('issue_owners', 'sectors', 'sectorsWithEntities'));

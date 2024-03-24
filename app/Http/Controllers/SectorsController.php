@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Entity;
 use App\Models\Sector;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,21 +17,52 @@ class SectorsController extends Controller
         //
     }
 
+    public function create(Request $request)
+    {
+        if (!Auth::user()->role === 'Admin') {
+            abort(403, 'Unauthorized Access');
+        }
+
+        $entityId = $request->query('entity_id');
+        if ($entityId) {
+            session(['last_selected_entity_id' => $entityId]);
+        } else {
+            $entityId = session('last_selected_entity_id', null);
+        }
+
+        $entity = null;
+        if ($entityId) {
+            $entity = Entity::find($entityId);
+        }
+
+        $entities = Entity::all(); // Assuming you want to list all entities in the dropdown
+        $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
+        return view('pages.add_sector_page', compact('entities', 'entity', 'sectorsWithEntities'));
+    }
+
+
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        if (!Auth::user()->role === 'Admin') {
+            abort(403, 'Unauthorized Access');
+        }
+
+        $request->validate([
+            'entity_id' => 'required|exists:entities,id',
+            'name' => 'required|string|max:255',
+        ]);
+
+        $sector = new Sector;
+        $sector->entity_id = $request->entity_id;
+        $sector->name = $request->name;
+        $sector->save();
+
+        return redirect()->route('show_entity', ['id' => $sector->entity_id])->with('message', 'Sector Added Successfully');
     }
+
 
     /**
      * Display the specified resource.

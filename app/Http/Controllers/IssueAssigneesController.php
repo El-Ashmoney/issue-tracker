@@ -14,7 +14,7 @@ class IssueAssigneesController extends Controller
      */
     public function index()
     {
-        $issue_assignees = IssueAssignee::paginate(12);
+        $issue_assignees = IssueAssignee::paginate(10);
         $sectors = Sector::all();
         $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
         return view('pages.issue_assaignees', compact('issue_assignees', 'sectors', 'sectorsWithEntities'));

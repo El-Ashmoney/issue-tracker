@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Entity;
 use App\Models\Sector;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EntitiesController extends Controller
 {
@@ -20,7 +21,12 @@ class EntitiesController extends Controller
      */
     public function create()
     {
-        //
+        if (!Auth::user()->role === 'Admin') {
+            abort(403, 'Unauthorized Access');
+        } else {
+            $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
+            return view('pages.add_entity', compact('sectorsWithEntities'));
+        }
     }
 
     /**
@@ -28,7 +34,13 @@ class EntitiesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        $entity = new Entity;
+        $entity->name = $request->name;
+        $entity->save();
+        return redirect()->route('show_entity', ['id' => $entity->id])->with('message', 'Entity Added Successfully');
     }
 
     /**
