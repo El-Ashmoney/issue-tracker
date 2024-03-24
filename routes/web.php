@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AzureDevOpsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsersController;
@@ -80,4 +81,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     // Search Route Controller
     Route::get('/search', [SearchController::class, 'search'])->name('search');
     Route::get('/add_issue', [IssuesController::class, 'createFromSearch'])->name('add_searched_issue_page');
+
+    // Azure Route Controller
+    // Route::get('/azure-devops/work-items', [AzureDevOpsController::class, 'getWorkItem']);
+    Route::get('/azure-devops/work-item/{workItemId}', [AzureDevOpsController::class, 'getWorkItem'])->name('azure-devops.work-item');
 });
