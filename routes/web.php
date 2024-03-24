@@ -67,6 +67,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/show_entity/{id}', [EntitiesController::class, 'show'])->name('show_entity');
     Route::get('/entities/create', [EntitiesController::class, 'create'])->name('entity.create');
     Route::post('/show_entity/store', [EntitiesController::class, 'store'])->name('entity.store');
+    Route::get('/entity.delete/{id}', [EntitiesController::class, 'destroy'])->name('entity.delete');
 
     // Sectors Route Controller
     Route::get('/sectors/create', [SectorsController::class, 'create'])->name('sector.create');

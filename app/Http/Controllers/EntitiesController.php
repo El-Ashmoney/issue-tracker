@@ -75,6 +75,12 @@ class EntitiesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        if (!Auth::user()->role === 'Admin') {
+            abort(403, 'Unauthorized Access');
+        } else {
+            $entity = Entity::find($id);
+            $entity->delete();
+            return redirect()->route('index')->with('message', 'Entity Deleted Successfully');
+        }
     }
 }

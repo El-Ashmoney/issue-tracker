@@ -36,8 +36,9 @@
                         <div class="card-margin card">
                             <h5 class="display-4 card-header text-center text-uppercase">Entity: {{ $entity->name }}</h5>
                             <div class="flex justify-between items-center rounded-full" style="margin: 10px 20px">
-                                <a href="{{ Route('sector.create', ['entity_id' => $entity->id]) }}" class="btn rounded-pill btn-primary waves-effect waves-light">Add Sector</a>
-                                <a href="{{ Route('entity.create')}}" class="btn rounded-pill btn-primary waves-effect waves-light">Add Entity</a>
+                                <a href="{{ Route('sector.create', ['entity_id' => $entity->id]) }}" class="btn rounded-pill btn-primary waves-effect waves-light"><span class="mdi mdi-plus-thick me-1"></span>Add Sector</a>
+                                <a href="{{ Route('entity.create')}}" class="btn rounded-pill btn-primary waves-effect waves-light"><i class="mdi mdi-shape-plus me-1"></i>Add Entity</a>
+                                <a href="{{ Route('entity.delete', $entity->id)}}" class="btn rounded-pill btn-danger waves-effect waves-light" onclick="return confirm('Are You Sure!')"><i class="mdi mdi-trash-can-outline me-1"></i>Delete Entity</a>
                             </div>
                             <div class="table-responsive text-nowrap">
                                 <table class="table">
