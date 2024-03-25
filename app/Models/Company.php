@@ -19,7 +19,4 @@ class Company extends Model
 
     // Enable or disable automatic handling of created_at and updated_at columns
     public $timestamps = true;
-
-
-    // Define relationships
 }

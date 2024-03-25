@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('discipline');
             $table->string('teams');
             $table->string('source');
-            $table->string('WorkedTime');
+            $table->string('worked_time');
             $table->string('description_of_close');
             $table->timestamps();
         });
