@@ -89,7 +89,7 @@
                 <span class="menu-header-text">Issues &amp; Related</span>
             </li>
         </li>
-        <li class="menu-item {{ request()->is('issues*', 'all_issues*','edit_issue*', 'azure*') ? 'open' : '' }}">
+        <li class="menu-item {{ request()->is('issues*', 'all_issues*','edit_issue*', 'azure_issues*') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons mdi mdi-window-maximize"></i>
                 <div data-i18n="Layouts">Issues</div>
@@ -108,9 +108,9 @@
                     </a>
                 </li>
                 {{-- Route('azure-devops.rnr-work-item', '55444') --}}
-                <li class="menu-item {{ request()->is('azure') ? 'active' : '' }}">
-                    <a href="{{ Route('azure') }}" class="menu-link">
-                        <div data-i18n="azure">Azure</div>
+                <li class="menu-item {{ request()->is('azure_issues') ? 'active' : '' }}">
+                    <a href="{{ Route('azure_issues') }}" class="menu-link">
+                        <div data-i18n="azure_issues">Azure Issues</div>
                         <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $issues_count }}</span>
                     </a>
                 </li>

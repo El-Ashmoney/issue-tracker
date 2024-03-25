@@ -37,7 +37,7 @@
                             </div>
                         @endif
                         <div class="card-margin card">
-                            <h5 class="scroll-pt-0 display-4 card-header text-center text-uppercase">All Issues</h5>
+                            <h5 class="scroll-pt-0 display-4 card-header text-center text-uppercase">Azure Issues</h5>
                             <div class="flex justify-between items-center rounded-full" style="margin: 10px 20px">
                                 <a href="{{ route('export.issues') }}" class="btn rounded-pill btn-primary waves-effect waves-light"><span class="mdi mdi-tray-arrow-down me-1"></span>Download Issues Report</a>
                                 <a href="{{ Route('add_issue_page') }}" class="btn rounded-pill btn-primary waves-effect waves-light"><span class="mdi mdi-plus-thick me-1"></span>Add Issue</a>
@@ -48,23 +48,24 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Created By</th>
-                                            <th>Issue</th>
-                                            <th>Sector</th>
-                                            <th>Owner</th>
-                                            <th>Assignee</th>
-                                            <th>Scale</th>
+                                            <th>Issue Title</th>
+                                            <th>Issue Description</th>
                                             <th>Company</th>
+                                            <th>Assignee</th>
+                                            <th>Status</th>
+                                            <th>Priority</th>
                                             <th>Duration</th>
-                                            <th>Issue Date</th>
-                                            <th>Issue Status</th>
-                                            <th>Azure Status</th>
+                                            <th>Discipline</th>
+                                            <th>Teams</th>
+                                            <th>Source</th>
+                                            <th>Description of Close</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
-                                        @foreach ($issues as $issue)
+                                        @foreach ($azure_issues as $issue)
                                             <tr class="table-default">
-                                                <td>{{ $issue->issue_id }}</td>
+                                                {{-- <td>{{ $issue->issue_id }}</td>
                                                 <td>{{ $issue->creator ? $issue->creator->username : 'N/A' }}</td>
                                                 <td>{{ Str::limit($issue->issue_description, 30, '...') }}</td>
                                                 {{-- <td>{{ $issue->issue_description }}</td> --}}
@@ -88,39 +89,13 @@
                                                     @else
                                                         <span class="badge rounded-pill bg-danger">Not Authorized</span>
                                                     @endif
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        {{-- @if ($issues->lastPage() > 1)
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination justify-content-center">
-                                    {{-- Previous Page Link --}}
-                                    <li class="page-item {{ ($issues->currentPage() == 1) ? ' disabled' : '' }}">
-                                        <a class="page-link waves-effect" href="{{ $issues->previousPageUrl() }}"><i class="tf-icon mdi mdi-chevron-double-left"></i></a>
-                                    </li>
-
-                                    {{-- Pagination Elements --}}
-                                    @php
-                                        $start = max($issues->currentPage() - 2, 1);
-                                        $end = min(max($issues->currentPage() + 2, 5), $issues->lastPage());
-                                    @endphp
-                                    @for ($i = $start; $i <= $end; $i++)
-                                        <li class="page-item {{ ($issues->currentPage() == $i) ? ' active' : '' }}">
-                                            <a class="page-link" href="{{ $issues->url($i) }}">{{ $i }}</a>
-                                        </li>
-                                    @endfor
-
-                                    {{-- Next Page Link --}}
-                                    <li class="page-item {{ ($issues->currentPage() == $issues->lastPage()) ? ' disabled' : '' }}">
-                                        <a class="page-link waves-effect" href="{{ $issues->nextPageUrl() }}"><i class="tf-icon mdi mdi-chevron-double-right"></i></a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        @endif --}}
                     </div>
                     <!--/ Contextual Classes -->
                 </div>

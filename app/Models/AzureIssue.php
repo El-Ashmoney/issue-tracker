@@ -13,6 +13,7 @@ class AzureIssue extends Model
         'title',
         'description',
         'project',
+        'created_by',
         'issue_assignee',
         'status',
         'priority',
