@@ -2,12 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Issue;
+use App\Models\Sector;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use GuzzleHttp\Exception\GuzzleException;
 
 class AzureDevOpsController extends Controller
 {
+    public function index()
+    {
+        $issues = Issue::where('created_by', Auth::id())->with(['creator', 'owner', 'assignee', 'company'])->paginate(12);
+        $sectors = Sector::all();
+        $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
+        return view('pages.issues', compact('issues', 'sectors', 'sectorsWithEntities'));
+    }
     public function sracoGetWorkItem($workItemId)
     {
         $personalAccessToken = env('AZURE_DEVOPS_PAT');
