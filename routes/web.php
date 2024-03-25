@@ -83,6 +83,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/add_issue', [IssuesController::class, 'createFromSearch'])->name('add_searched_issue_page');
 
     // Azure Route Controller
-    // Route::get('/azure-devops/work-items', [AzureDevOpsController::class, 'getWorkItem']);
-    Route::get('/azure-devops/work-item/{workItemId}', [AzureDevOpsController::class, 'getWorkItem'])->name('azure-devops.work-item');
+    Route::get('/azure-devops/work-item/{workItemId}', [AzureDevOpsController::class, 'sracoGetWorkItem'])->name('azure-devops.sraco-work-item');
+    Route::get('/azure-devops/work-item/{workItemId}', [AzureDevOpsController::class, 'rnrGetWorkItem'])->name('azure-devops.rnr-work-item');
 });
