@@ -89,13 +89,13 @@
                 <span class="menu-header-text">Issues &amp; Related</span>
             </li>
         </li>
-        <li class="menu-item {{ request()->is('issues*', 'all_issues*','edit_issue*', 'azure_issues*') ? 'open' : '' }}">
+        <li class="menu-item {{ request()->is('issues*', 'all_issues*', 'edit_issue*', 'azure_issues*', 'add_issue_page*') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons mdi mdi-window-maximize"></i>
                 <div data-i18n="Layouts">Issues</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item {{ request()->is('issues', 'edit_issue/*') ? 'active' : '' }}">
+                <li class="menu-item {{ request()->is('issues', 'edit_issue/*', 'add_issue_page') ? 'active' : '' }}">
                     <a href="{{ Route('issues') }}" class="menu-link">
                         <div data-i18n="Issues">My Issues</div>
                         <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $my_issues_count }}</span>

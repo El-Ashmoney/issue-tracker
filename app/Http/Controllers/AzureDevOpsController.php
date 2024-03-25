@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AzureIssue;
 use App\Models\Issue;
 use App\Models\Sector;
 use GuzzleHttp\Client;
+use App\Models\Company;
+use App\Models\AzureIssue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Exception\GuzzleException;
@@ -17,7 +18,8 @@ class AzureDevOpsController extends Controller
         $azure_issues = AzureIssue::paginate(12);
         $sectors = Sector::all();
         $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
-        return view('pages.azure_issues', compact('azure_issues', 'sectors', 'sectorsWithEntities'));
+        $companies = Company::all();
+        return view('pages.azure_issues', compact('azure_issues', 'sectors', 'sectorsWithEntities', 'companies'));
     }
     public function sracoGetWorkItem($workItemId)
     {

@@ -38,9 +38,27 @@
                         @endif
                         <div class="card-margin card">
                             <h5 class="scroll-pt-0 display-4 card-header text-center text-uppercase">Azure Issues</h5>
-                            <div class="flex justify-between items-center rounded-full" style="margin: 10px 20px">
-                                <a href="{{ route('export.issues') }}" class="btn rounded-pill btn-primary waves-effect waves-light"><span class="mdi mdi-tray-arrow-down me-1"></span>Download Issues Report</a>
-                                <a href="{{ Route('add_issue_page') }}" class="btn rounded-pill btn-primary waves-effect waves-light"><span class="mdi mdi-plus-thick me-1"></span>Add Issue</a>
+                            <div class="flex justify-between text-center" style="margin: 10px 20px">
+                                <div class="flex-grow-0">
+                                    <a href="{{ route('export.issues') }}" class="btn rounded-pill btn-primary waves-effect waves-light"><span class="mdi mdi-tray-arrow-down me-1"></span>Download Issues Report</a>
+                                </div>
+                                <form action="" method="post" class="flex justify-end">
+                                    @csrf
+                                    <div class="mr-4">
+                                        <select class="form-select form-control border-2 border-sky-500 shadow-none bg-white rounded-pill" name="company_id" required  id="exampleFormControlSelect1" aria-label="Default select example">
+                                            <option value="">Select Company</option>
+                                            @foreach ($companies as $company)
+                                            <option value="{{ $company->company_id }}">{{ $company->company_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="mr-4">
+                                        <input id="defaultInput" class="w-32 form-control border-2 border-sky-500 shadow-none bg-white rounded-pill" type="text" name="issue_number" placeholder="Issue Number">
+                                    </div>
+                                    <div class="{{ request()->is('add_issue_page') ? 'active' : ''  }}">
+                                        <button type="submit" class="update-btn btn rounded-pill btn-primary waves-effect waves-light"><span class="mdi mdi-plus-thick me-1"></span>Add Issue</button>
+                                    </div>
+                                </form>
                             </div>
                             <div class="table-responsive text-nowrap">
                                 <table class="table">
