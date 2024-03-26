@@ -41,74 +41,81 @@ class AzureDevOpsController extends Controller
         return view('pages.azure_issues', compact('azure_issues', 'sectors', 'sectorsWithEntities', 'companies', 'projects'));
     }
 
-    public function sracoGetWorkItem($workItemId)
+
+    public function getWorkItem($workItemId, $projectName)
     {
         $personalAccessToken = env('AZURE_DEVOPS_PAT');
         $organization = 'ExProtectionProduects';
-        $project = 'SRACO';
         $apiVersion = '7.1-preview.3';
+
         $client = new Client();
         try {
-            $response = $client->request('GET', "https://dev.azure.com/{$organization}/{$project}/_apis/wit/workitems/{$workItemId}?api-version={$apiVersion}", [
+            $response = $client->request('GET', "https://dev.azure.com/{$organization}/{$projectName}/_apis/wit/workitems/{$workItemId}?api-version={$apiVersion}", [
                 'headers' => [
                     'Authorization' => 'Basic ' . base64_encode(":{$personalAccessToken}"),
                     'Accept' => 'application/json',
                 ],
             ]);
-            $workItem = json_decode($response->getBody()->getContents(), true);
-            return response()->json($workItem);
+
+            if ($response->getStatusCode() == 200) {
+                return json_decode($response->getBody()->getContents(), true);
+            } else {
+                return null;
+            }
         } catch (GuzzleException $e) {
-            return response()->json(['error' => 'Request failed: ' . $e->getMessage()], 500);
+            return null;
         }
     }
 
     public function addIssue(Request $request)
     {
         $request->validate([
-            'company_id' => 'required', // Assuming 'company_id' is the project name/ID
+            'company_id' => 'required',
             'issue_number' => 'required|numeric',
         ]);
         $projectName = $request->input('company_id');
         $issueNumber = $request->input('issue_number');
-        $workItemDetails = $this->sracoGetWorkItem($issueNumber);
-        if ($workItemDetails->getStatusCode() === 200) {
-            $workItem = json_decode($workItemDetails->getContent(), true);
+        $workItem = $this->getWorkItem($issueNumber, $projectName);
+        if ($workItem) {
+            $azureProjectName = $workItem['fields']['System.TeamProject'] ?? null;
 
-            // Extract the necessary fields from $workItem
-            $project = strip_tags($workItem['fields']['System.TeamProject'] ?? null);
-            $issue_type = strip_tags($workItem['fields']['System.WorkItemType'] ?? null);
-            $title = strip_tags($workItem['fields']['System.Title']);
-            $description = strip_tags($workItem['fields']['Microsoft.VSTS.TCM.ReproSteps'] ?? null);
-            $createdBy = strip_tags($workItem['fields']['System.CreatedBy']['displayName'] ?? null);
-            $resolvedBy = strip_tags($workItem['fields']['Microsoft.VSTS.Common.ResolvedBy']['displayName'] ?? null);
-            $status = strip_tags($workItem['fields']['System.State'] ?? null);
-            $priority = strip_tags($workItem['fields']['Microsoft.VSTS.Common.Priority'] ?? null);
-            $discipline = strip_tags($workItem['fields']['Microsoft.VSTS.Common.Discipline'] ?? null);
-            $teams = strip_tags($workItem['fields']['Custom.Teams'] ?? null);
-            $source = strip_tags($workItem['fields']['Custom.Source'] ?? null);
-            $WorkedTime = strip_tags($workItem['fields']['Custom.WorkedTime'] ?? null);
-            $descriptionOfClose = strip_tags($workItem['fields']['Custom.DescriptionofClose'] ?? 'Not closed yet');
-            $createdDate = strip_tags($workItem['fields']['System.CreatedDate'] ?? null);
+            // Validate that the work item belongs to the selected project
+            if ($azureProjectName !== $projectName) {
+                return back()->with('error', 'The issue number does not exist in the selected project.');
+            }
+
+            $issue_type             = strip_tags($workItem['fields']['System.WorkItemType'] ?? null);
+            $title                  = strip_tags($workItem['fields']['System.Title']);
+            $description            = strip_tags($workItem['fields']['Microsoft.VSTS.TCM.ReproSteps'] ?? null);
+            $createdBy              = strip_tags($workItem['fields']['System.CreatedBy']['displayName'] ?? null);
+            $resolvedBy             = strip_tags($workItem['fields']['Microsoft.VSTS.Common.ResolvedBy']['displayName'] ?? null);
+            $status                 = strip_tags($workItem['fields']['System.State'] ?? null);
+            $priority               = strip_tags($workItem['fields']['Microsoft.VSTS.Common.Priority'] ?? null);
+            $discipline             = strip_tags($workItem['fields']['Microsoft.VSTS.Common.Discipline'] ?? null);
+            $teams                  = strip_tags($workItem['fields']['Custom.Teams'] ?? null);
+            $source                 = strip_tags($workItem['fields']['Custom.Source'] ?? null);
+            $WorkedTime             = strip_tags($workItem['fields']['Custom.WorkedTime'] ?? null);
+            $descriptionOfClose     = strip_tags($workItem['fields']['Custom.DescriptionofClose'] ?? 'Not closed yet');
+            $createdDate            = strip_tags($workItem['fields']['System.CreatedDate'] ?? null);
 
             $azureIssue = new AzureIssue([
-                'work_item_id' => $issueNumber,
-                'project' => $project,
-                'issue_type' => $issue_type,
-                'title' => $title,
-                'description' => $description,
-                'created_by' => $createdBy,
-                'resolved_by' => $resolvedBy,
-                'status' => $status,
-                'priority' => $priority,
-                'discipline' => $discipline,
-                'teams' => $teams,
-                'source' => $source,
-                'worked_time' => $WorkedTime,
-                'description_of_close' => $descriptionOfClose,
-                'created_date' => $createdDate,
+                'work_item_id'          => $issueNumber,
+                'project'               => $azureProjectName,
+                'issue_type'            => $issue_type,
+                'title'                 => $title,
+                'description'           => $description,
+                'created_by'            => $createdBy,
+                'resolved_by'           => $resolvedBy,
+                'status'                => $status,
+                'priority'              => $priority,
+                'discipline'            => $discipline,
+                'teams'                 => $teams,
+                'source'                => $source,
+                'worked_time'           => $WorkedTime,
+                'description_of_close'  => $descriptionOfClose,
+                'created_date'          => $createdDate,
             ]);
             $azureIssue->save();
-
             return redirect()->route('azure_issues')->with('message', 'Issue added successfully');
         } else {
             return redirect()->route('azure_issues')->with('error', 'Failed to fetch issue details from Azure DevOps');

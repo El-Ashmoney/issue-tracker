@@ -85,7 +85,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
     // Azure Route Controller
     Route::get('/azure_issues', [AzureDevOpsController::class, 'index'])->name('azure_issues');
-    Route::get('/azure-devops/work-item/{workItemId}', [AzureDevOpsController::class, 'sracoGetWorkItem'])->name('azure-devops.sraco-work-item');
-    Route::get('/azure-devops/work-item/{workItemId}', [AzureDevOpsController::class, 'rnrGetWorkItem'])->name('azure-devops.rnr-work-item');
+    Route::get('/azure-devops/work-item/{workItemId}', [AzureDevOpsController::class, 'getWorkItem'])->name('azure-devops.sraco-work-item');
     Route::post('/azure-issue/add', [AzureDevOpsController::class, 'addIssue'])->name('azure.issue.add');
 });
