@@ -10,18 +10,21 @@ class AzureIssue extends Model
     use HasFactory;
     // Specify which attributes can be mass assignable
     protected $fillable = [
+        'work_item_id',
+        'project',
+        'issue_type',
         'title',
         'description',
-        'project',
         'created_by',
-        'issue_assignee',
+        'resolved_by',
         'status',
         'priority',
         'discipline',
         'teams',
         'source',
-        'WorkedTime',
+        'worked_time',
         'description_of_close',
+        'created_date',
     ];
 
     // Specify the table if it's not the plural of the model name

@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('azure_issues', function (Blueprint $table) {
             $table->unsignedBigInteger('work_item_id')->primary();
+            $table->string('project');
+            $table->string('issue_type');
             $table->string('title');
             $table->text('description');
-            $table->string('project');
-            $table->string('issue_assignee');
+            $table->string('created_by');
+            $table->string('resolved_by');
             $table->string('status');
             $table->string('priority');
             $table->string('discipline');
@@ -24,6 +26,7 @@ return new class extends Migration
             $table->string('source');
             $table->string('worked_time');
             $table->string('description_of_close');
+            $table->string('created_date');
             $table->timestamps();
         });
     }

@@ -35,6 +35,11 @@
                                 {{ session()->get('message') }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
+                        @elseif (session()->has('error'))
+                            <div class="alert alert-danger alert-dismissible text-center" role="alert">
+                                {{ session()->get('error') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
                         @endif
                         <div class="card-margin card">
                             <h5 class="scroll-pt-0 display-4 card-header text-center text-uppercase">Azure Issues</h5>
@@ -42,7 +47,7 @@
                                 <div class="flex-grow-0">
                                     <a href="{{ route('export.issues') }}" class="btn rounded-pill btn-primary waves-effect waves-light"><span class="mdi mdi-tray-arrow-down me-1"></span>Download Issues Report</a>
                                 </div>
-                                <form action="" method="post" class="flex justify-end">
+                                <form action="{{ route('azure.issue.add') }}" method="post" class="flex justify-end">
                                     @csrf
                                     <div class="mr-4">
                                         <select class="form-select form-control border-2 border-sky-500 shadow-none bg-white rounded-pill" name="company_id" required  id="exampleFormControlSelect1" aria-label="Default select example">
@@ -53,7 +58,7 @@
                                         </select>
                                     </div>
                                     <div class="mr-4">
-                                        <input id="defaultInput" class="w-32 form-control border-2 border-sky-500 shadow-none bg-white rounded-pill" type="text" name="issue_number" placeholder="Issue Number">
+                                        <input id="defaultInput" class="w-32 form-control border-2 border-sky-500 shadow-none bg-white rounded-pill" type="text" name="issue_number" required placeholder="Issue Number">
                                     </div>
                                     <div class="{{ request()->is('add_issue_page') ? 'active' : ''  }}">
                                         <button type="submit" class="update-btn btn rounded-pill btn-primary waves-effect waves-light"><span class="mdi mdi-plus-thick me-1"></span>Add Issue</button>
@@ -69,45 +74,47 @@
                                             <th>Issue Title</th>
                                             <th>Issue Description</th>
                                             <th>Company</th>
-                                            <th>Assignee</th>
+                                            <th>Resolved By</th>
                                             <th>Status</th>
                                             <th>Priority</th>
-                                            <th>Duration</th>
                                             <th>Discipline</th>
                                             <th>Teams</th>
                                             <th>Source</th>
+                                            <th>Duration</th>
                                             <th>Description of Close</th>
+                                            <th>Created At</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
                                         @foreach ($azure_issues as $issue)
                                             <tr class="table-default">
-                                                {{-- <td>{{ $issue->issue_id }}</td>
-                                                <td>{{ $issue->creator ? $issue->creator->username : 'N/A' }}</td>
-                                                <td>{{ Str::limit($issue->issue_description, 30, '...') }}</td>
-                                                {{-- <td>{{ $issue->issue_description }}</td> --}}
-                                                <td>{{ $issue->sector->name }}</td>
-                                                <td>{{ $issue->owner ? $issue->owner->owner_name : 'N/A' }}</td>
-                                                <td>{{ $issue->assignee ? $issue->assignee->assignee_name : 'N/A' }}</td>
-                                                <td>{{ $issue->scale }}</td>
-                                                <td>{{ $issue->company ? $issue->company->company_name : 'N/A' }}</td>
-                                                <td>{{ $issue->time_duration }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($issue->created_at)->format('Y-m-d') }}</td>
+                                                <td>{{ $issue->work_item_id }}</td>
+                                                <td>{{ $issue->created_by }}</td>
+                                                <td>{{ Str::limit($issue->title, 30, '...') }}</td>
+                                                <td>{{ Str::limit($issue->description, 30, '...') }}</td>
+                                                <td>{{ $issue->project }}</td>
+                                                <td>{{ $issue->resolved_by }}</td>
                                                 <td>{{ $issue->status }}</td>
-                                                <td>{{ $issue->azure_status }}</td>
+                                                <td>{{ $issue->priority }}</td>
+                                                <td>{{ $issue->discipline }}</td>
+                                                <td>{{ $issue->teams }}</td>
+                                                <td>{{ $issue->source }}</td>
+                                                <td>{{ $issue->worked_time }}</td>
+                                                <td>{{ $issue->description_of_close }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($issue->created_date)->format('Y-m-d') }}</td>
                                                 <td>
                                                     @if (Auth::user()->role === 'Admin')
-                                                        <a href="{{ Route('edit_issue', $issue->issue_id) }}" class="badge btn rounded-pill btn-outline-dark waves-effect">
+                                                        <a href="{{ Route('edit_issue', $issue->work_item_id) }}" class="badge btn rounded-pill btn-outline-dark waves-effect">
                                                             <i class="mdi mdi-pencil-outline me-1"></i> Edit
                                                         </a>
-                                                        <a href="{{ Route('delete_issue', $issue->issue_id) }}" class="badge btn rounded-pill btn-danger waves-effect waves-light" onclick="return confirm('Are You Sure!')">
+                                                        <a href="{{ Route('delete_issue', $issue->work_item_id) }}" class="badge btn rounded-pill btn-danger waves-effect waves-light" onclick="return confirm('Are You Sure!')">
                                                             <i class="mdi mdi-trash-can-outline me-1"></i> Delete
                                                         </a>
                                                     @else
                                                         <span class="badge rounded-pill bg-danger">Not Authorized</span>
                                                     @endif
-                                                </td> --}}
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
