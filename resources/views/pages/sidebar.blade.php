@@ -107,11 +107,10 @@
                         <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $issues_count }}</span>
                     </a>
                 </li>
-                {{-- Route('azure-devops.rnr-work-item', '55444') --}}
                 <li class="menu-item {{ request()->is('azure_issues') ? 'active' : '' }}">
                     <a href="{{ Route('azure_issues') }}" class="menu-link">
                         <div data-i18n="azure_issues">Azure Issues</div>
-                        <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $issues_count }}</span>
+                        <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $azure_issues_count }}</span>
                     </a>
                 </li>
             </ul>

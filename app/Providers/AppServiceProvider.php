@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\AzureIssue;
 use App\Models\User;
 use App\Models\Issue;
 use App\Models\Entity;
@@ -37,7 +38,8 @@ class AppServiceProvider extends ServiceProvider
                 ->with('issue_assignees_count', IssueAssignee::count())
                 ->with('companies_count', Company::count())
                 ->with('entities_count', Entity::count())
-                ->with('entitiesWithSectorCount', $entitiesWithSectorCount);
+                ->with('entitiesWithSectorCount', $entitiesWithSectorCount)
+                ->with('azure_issues_count', AzureIssue::count());
         });
     }
 }

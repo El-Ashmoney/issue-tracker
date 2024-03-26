@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AzureDevOpsController;
+use App\Http\Controllers\AzureIssuesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsersController;
@@ -86,4 +87,5 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/azure_issues', [AzureDevOpsController::class, 'index'])->name('azure_issues');
     Route::get('/azure-devops/work-item/{workItemId}', [AzureDevOpsController::class, 'sracoGetWorkItem'])->name('azure-devops.sraco-work-item');
     Route::get('/azure-devops/work-item/{workItemId}', [AzureDevOpsController::class, 'rnrGetWorkItem'])->name('azure-devops.rnr-work-item');
+    Route::post('/add_azure_issue', [AzureIssuesController::class, ''])->name('azure.add-work-item');
 });

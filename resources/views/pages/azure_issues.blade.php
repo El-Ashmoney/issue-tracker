@@ -47,8 +47,8 @@
                                     <div class="mr-4">
                                         <select class="form-select form-control border-2 border-sky-500 shadow-none bg-white rounded-pill" name="company_id" required  id="exampleFormControlSelect1" aria-label="Default select example">
                                             <option value="">Select Company</option>
-                                            @foreach ($companies as $company)
-                                            <option value="{{ $company->company_id }}">{{ $company->company_name }}</option>
+                                            @foreach ($projects as $project)
+                                                <option value="{{ $project['id'] }}">{{ $project['name'] }}</option>
                                             @endforeach
                                         </select>
                                     </div>
