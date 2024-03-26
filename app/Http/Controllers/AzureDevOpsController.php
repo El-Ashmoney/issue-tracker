@@ -131,7 +131,6 @@ class AzureDevOpsController extends Controller
                 DB::rollBack();
                 $errorCode = $e->errorInfo[1];
                 if ($errorCode == 1062) {
-                    // Customize your error message for a duplicate entry
                     return back()->with('error', 'The issue number already exists in the selected project.');
                 }
             }
