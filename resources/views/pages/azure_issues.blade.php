@@ -71,8 +71,9 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Created By</th>
-                                            <th>Issue Title</th>
-                                            <th>Issue Description</th>
+                                            <th>Type</th>
+                                            <th>Title</th>
+                                            <th>Description</th>
                                             <th>Company</th>
                                             <th>Resolved By</th>
                                             <th>Status</th>
@@ -91,6 +92,7 @@
                                             <tr class="table-default">
                                                 <td>{{ $issue->work_item_id }}</td>
                                                 <td>{{ $issue->created_by }}</td>
+                                                <td>{{ $issue->issue_type }}</td>
                                                 <td>{{ Str::limit($issue->title, 30, '...') }}</td>
                                                 <td>{{ Str::limit($issue->description, 30, '...') }}</td>
                                                 <td>{{ $issue->project }}</td>
