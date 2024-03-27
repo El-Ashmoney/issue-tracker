@@ -44,12 +44,11 @@ class IssuesController extends Controller
         $owners         = IssueOwner::all();
         $assignees      = IssueAssignee::all();
         $companies      = Company::all();
-        $issues         = Issue::all()->scale;
         $scaleOption    = ['Low', 'Medium', 'High'];
         $statusOption   = ['Pending', 'On Process', 'Finished'];
         $azureOption    = ['Pending', 'Resolved', 'Closed', 'Not Listed'];
         $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
-        return view('pages.add_issue', compact('sectors', 'owners', 'assignees', 'companies', 'scaleOption', 'statusOption', 'azureOption', 'sectorsWithEntities', 'issues'));
+        return view('pages.add_issue', compact('sectors', 'owners', 'assignees', 'companies', 'scaleOption', 'statusOption', 'azureOption', 'sectorsWithEntities'));
     }
 
     public function createFromSearch(Request $request)

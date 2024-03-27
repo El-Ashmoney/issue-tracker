@@ -91,7 +91,7 @@
                                             </div>
                                             <div class="form-floating form-floating-outline mb-4">
                                                 <select class="form-select" id="exampleFormControlSelect1" name="scale" aria-label="Default select example">
-                                                    <option selected="">Scale</option>
+                                                    <option value="">Scale</option>
                                                     @foreach ($scaleOption as $option)
                                                         <option value="{{ $option }}">{{ $option }}</option>
                                                     @endforeach
@@ -103,7 +103,7 @@
                                             </div>
                                             <div class="form-floating form-floating-outline mb-4">
                                                 <select class="form-select" id="exampleFormControlSelect1" name="status" aria-label="Default select example">
-                                                    <option selected="">Status</option>
+                                                    <option value="">Status</option>
                                                     @foreach ($statusOption as $option)
                                                         <option value="{{ $option }}">{{ $option }}</option>
                                                     @endforeach
@@ -115,7 +115,7 @@
                                             </div>
                                             <div class="form-floating form-floating-outline mb-4">
                                                 <select class="form-select" id="exampleFormControlSelect1" name="azure_status" aria-label="Default select example">
-                                                    <option selected="">Azure Status</option>
+                                                    <option value="">Azure Status</option>
                                                     @foreach ($azureOption as $option)
                                                         <option value="{{ $option }}">{{ $option }}</option>
                                                     @endforeach
