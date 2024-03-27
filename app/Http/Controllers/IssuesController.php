@@ -9,6 +9,7 @@ use App\Models\Company;
 use App\Models\IssueOwner;
 use Illuminate\Http\Request;
 use App\Models\IssueAssignee;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -43,11 +44,12 @@ class IssuesController extends Controller
         $owners         = IssueOwner::all();
         $assignees      = IssueAssignee::all();
         $companies      = Company::all();
+        $issues         = Issue::all()->scale;
         $scaleOption    = ['Low', 'Medium', 'High'];
-        $statusOption   = ['On Process', 'Finished'];
+        $statusOption   = ['Pending', 'On Process', 'Finished'];
         $azureOption    = ['Pending', 'Resolved', 'Closed', 'Not Listed'];
         $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
-        return view('pages.add_issue', compact('sectors', 'owners', 'assignees', 'companies', 'scaleOption', 'statusOption', 'azureOption', 'sectorsWithEntities'));
+        return view('pages.add_issue', compact('sectors', 'owners', 'assignees', 'companies', 'scaleOption', 'statusOption', 'azureOption', 'sectorsWithEntities', 'issues'));
     }
 
     public function createFromSearch(Request $request)
@@ -57,7 +59,7 @@ class IssuesController extends Controller
         $assignees      = IssueAssignee::all();
         $companies      = Company::all();
         $scaleOption    = ['Low', 'Medium', 'High'];
-        $statusOption   = ['On Process', 'Finished'];
+        $statusOption   = ['Pending', 'On Process', 'Finished'];
         $azureOption    = ['Pending', 'Resolved', 'Closed', 'Not Listed'];
 
         $query = $request->input('query');

@@ -37,6 +37,9 @@
                                             <div class="form-floating form-floating-outline mb-4">
                                                 <textarea id="basic-default-issue" class="form-control" placeholder="Descripe the issue" style="height: 60px" name="issue_description"></textarea>
                                                 <label for="basic-default-issue">Issue</label>
+                                                @error('issue_description')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-floating form-floating-outline mb-4">
                                                 <select class="form-select" name="sector_id" id="exampleFormControlSelect1" aria-label="Default select example">
@@ -46,6 +49,9 @@
                                                     @endforeach
                                                 </select>
                                                 <label for="exampleFormControlSelect1">Select Sector <span class="mdi mdi-arrow-down-right"></span></label>
+                                                @error('sector_id')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-floating form-floating-outline mb-4">
                                                 <select class="form-select" id="exampleFormControlSelect1" name="owner_id" aria-label="Default select example">
@@ -55,6 +61,9 @@
                                                     @endforeach
                                                 </select>
                                                 <label for="exampleFormControlSelect1">Select Owner <span class="mdi mdi-arrow-down-right"></span></label>
+                                                @error('owner_id')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-floating form-floating-outline mb-4">
                                                 <select class="form-select" id="exampleFormControlSelect1" name="assignee_id" aria-label="Default select example">
@@ -64,6 +73,9 @@
                                                     @endforeach
                                                 </select>
                                                 <label for="exampleFormControlSelect1">Select Assignee <span class="mdi mdi-arrow-down-right"></span></label>
+                                                @error('assignee_id')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-floating form-floating-outline mb-4">
                                                 <select class="form-select" id="exampleFormControlSelect1" name="company_id" aria-label="Default select example">
@@ -73,6 +85,9 @@
                                                     @endforeach
                                                 </select>
                                                 <label for="exampleFormControlSelect1">Select Company <span class="mdi mdi-arrow-down-right"></span></label>
+                                                @error('company_id')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-floating form-floating-outline mb-4">
                                                 <select class="form-select" id="exampleFormControlSelect1" name="scale" aria-label="Default select example">
@@ -82,6 +97,9 @@
                                                     @endforeach
                                                 </select>
                                                 <label for="exampleFormControlSelect1">Select Scale <span class="mdi mdi-arrow-down-right"></span></label>
+                                                @error('scale')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-floating form-floating-outline mb-4">
                                                 <select class="form-select" id="exampleFormControlSelect1" name="status" aria-label="Default select example">
@@ -91,6 +109,9 @@
                                                     @endforeach
                                                 </select>
                                                 <label for="exampleFormControlSelect1">Status <span class="mdi mdi-arrow-down-right"></span></label>
+                                                @error('status')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="form-floating form-floating-outline mb-4">
                                                 <select class="form-select" id="exampleFormControlSelect1" name="azure_status" aria-label="Default select example">
@@ -100,6 +121,9 @@
                                                     @endforeach
                                                 </select>
                                                 <label for="exampleFormControlSelect1">Azure Status <span class="mdi mdi-arrow-down-right"></span></label>
+                                                @error('azure_status')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="flex justify-center">
                                                 <button type="submit" class="update-btn rounded-pill btn btn-primary waves-effect waves-light">Add Issue</button>
