@@ -40,6 +40,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
     // Companies Route Controller
     Route::get('/companies', [CompaniesController::class, 'index'])->name('companies');
+    Route::get('/create_company', [CompaniesController::class, 'create'])->name('create_company');
+    Route::post('/add_company', [CompaniesController::class, 'store'])->name('add_company');
     Route::get('/edit_company/{id}', [CompaniesController::class, 'edit'])->name('edit_company');
     Route::post('/update_company/{id}', [CompaniesController::class, 'update'])->name('update_company');
     Route::get('/delete_company/{id}', [CompaniesController::class, 'destroy'])->name('delete_company');

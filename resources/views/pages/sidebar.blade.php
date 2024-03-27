@@ -98,19 +98,19 @@
                 <li class="menu-item {{ request()->is('issues', 'edit_issue/*', 'add_issue_page') ? 'active' : '' }}">
                     <a href="{{ Route('issues') }}" class="menu-link">
                         <div data-i18n="Issues">My Issues</div>
-                        <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $my_issues_count }}</span>
+                        <span class="badge bg-label-primary fs-tiny rounded-pill ms-auto">{{ $my_issues_count }}</span>
                     </a>
                 </li>
                 <li class="menu-item {{ request()->is('all_issues') ? 'active' : '' }}">
                     <a href="{{ Route('all_issues') }}" class="menu-link">
                         <div data-i18n="all_issues">All Issues</div>
-                        <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $issues_count }}</span>
+                        <span class="badge bg-label-primary fs-tiny rounded-pill ms-auto">{{ $issues_count }}</span>
                     </a>
                 </li>
                 <li class="menu-item {{ request()->is('azure_issues') ? 'active' : '' }}">
                     <a href="{{ Route('azure_issues') }}" class="menu-link">
                         <div data-i18n="azure_issues">Azure Issues</div>
-                        <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $azure_issues_count }}</span>
+                        <span class="badge bg-label-primary fs-tiny rounded-pill ms-auto">{{ $azure_issues_count }}</span>
                     </a>
                 </li>
             </ul>
@@ -119,34 +119,34 @@
         <li class="menu-header fw-medium mt-4">
             <span class="menu-header-text">Misc</span>
         </li>
-        <li class="menu-item {{ request()->is('companies*', 'edit_company*', 'issue_assignees*', 'edit_issue_assignee*', 'issue_owners*', 'edit_issue_owner*', 'users*', 'edit_user*', 'create_issue_assignee', 'create_issue_owner') ? 'open' : '' }}">
+        <li class="menu-item {{ request()->is('companies*', 'edit_company*', 'issue_assignees*', 'edit_issue_assignee*', 'issue_owners*', 'edit_issue_owner*', 'users*', 'edit_user*', 'create_issue_assignee', 'create_issue_owner', 'create_company') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons mdi mdi-cube-outline"></i>
                 <div data-i18n="Misc">Misc</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item {{ request()->is('companies', 'edit_company/*') ? 'active' : '' }}">
+                <li class="menu-item {{ request()->is('companies', 'create_company', 'edit_company/*') ? 'active' : '' }}">
                     <a href="{{ Route('companies') }}" class="menu-link">
                         <div data-i18n="Companies">Companies</div>
-                        <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $companies_count }}</span>
+                        <span class="badge bg-label-primary fs-tiny rounded-pill ms-auto">{{ $companies_count }}</span>
                     </a>
                 </li>
                 <li class="menu-item {{ request()->is('issue_assignees', 'edit_issue_assignee/*', 'create_issue_assignee*') ? 'active' : '' }}">
                     <a href="{{ Route('issue_assignees') }}" class="menu-link">
                         <div data-i18n="Issue-Assignees">Issue Assignees</div>
-                        <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $issue_assignees_count }}</span>
+                        <span class="badge bg-label-primary fs-tiny rounded-pill ms-auto">{{ $issue_assignees_count }}</span>
                     </a>
                 </li>
                 <li class="menu-item {{ request()->is('issue_owners', 'edit_issue_owner/*', 'create_issue_owner') ? 'active' : '' }}">
                     <a href="{{ Route('issue_owners') }}" class="menu-link">
                         <div data-i18n="Issue-Owners">Issue Owners</div>
-                        <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $issue_owners_count }}</span>
+                        <span class="badge bg-label-primary fs-tiny rounded-pill ms-auto">{{ $issue_owners_count }}</span>
                     </a>
                 </li>
                 <li class="menu-item {{ request()->is('users', 'edit_user/*') ? 'active' : '' }}">
                     <a href="{{ Route('users') }}" class="menu-link">
                         <div data-i18n="Users">Users</div>
-                        <span class="flex justify-end badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $users_count }}</span>
+                        <span class="badge bg-label-primary fs-tiny rounded-pill ms-auto">{{ $users_count }}</span>
                     </a>
                 </li>
             </ul>
@@ -173,7 +173,7 @@
                     <li class="menu-item {{ $activeEntityId == $entity->id ? 'active' : '' }}">
                         <a href="{{ route('show_entity', ['id' => $entity->id]) }}" class="menu-link">
                             <div>{{ $entity->name }}</div>
-                            <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $entity->sectors_count }}</span>
+                            <span class="badge bg-label-primary fs-tiny rounded-pill ms-auto">{{ $entity->sectors_count }}</span>
                         </a>
                     </li>
                 @endforeach

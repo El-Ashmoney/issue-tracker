@@ -25,7 +25,27 @@ class CompaniesController extends Controller
      */
     public function create()
     {
-        //
+        if (!Auth::user()->role === 'Admin') {
+            abort(403, 'Unauthorized Access');
+        } else {
+            $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
+            return view('pages.add_company', compact('sectorsWithEntities'));
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        if (!Auth::user()->role === 'Admin') {
+            abort(403, 'Unauthorized Access');
+        } else {
+            $company = new Company;
+            $company->company_name = $request->company_name;
+            $company->save();
+            return redirect()->route('companies')->with('message', 'Company added successfully');
+        }
     }
 
     /**

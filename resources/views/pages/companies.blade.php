@@ -36,7 +36,7 @@
                         <div class="card-margin card">
                             <h5 class="display-4 card-header text-center text-uppercase">Companies</h5>
                             <div class="flex justify-between items-center rounded-full" style="margin: 10px 20px">
-                                <a href="{{ route('all_issues') }}" class="btn rounded-pill btn-primary waves-effect waves-light"><span class="mdi mdi-plus-thick me-1"></span>Add Company</a>
+                                <a href="{{ route('create_company') }}" class="btn rounded-pill btn-primary waves-effect waves-light"><span class="mdi mdi-plus-thick me-1"></span>Add Company</a>
                             </div>
                             <div class="table-responsive text-nowrap">
                                 <table class="table">
