@@ -158,7 +158,7 @@
                 <div data-i18n="Misc">Entities</div>
             </a>
             <ul class="menu-sub">
-                @php
+                {{-- @php
                     $currentRouteName = Route::currentRouteName();
                     if ($currentRouteName == 'show_entity') {
                         $activeEntityId = request()->id;
@@ -167,16 +167,40 @@
                     } else {
                         $activeEntityId = null;
                     }
-                @endphp
-
-                @foreach ($entitiesWithSectorCount as $entity)
+                @endphp --}}
+                {{-- @foreach ($entitiesWithSectorCount as $entity)
                     <li class="menu-item {{ $activeEntityId == $entity->id ? 'active' : '' }}">
                         <a href="{{ route('show_entity', ['id' => $entity->id]) }}" class="menu-link">
                             <div>{{ $entity->name }}</div>
                             <span class="badge bg-label-primary fs-tiny rounded-pill ms-auto">{{ $entity->sectors_count }}</span>
                         </a>
                     </li>
+                @endforeach --}}
+                @php
+                    $currentRouteName = Route::currentRouteName();
+                    // Assuming 'entity_id' might be passed as a query parameter for the 'sectors/create' route
+                    $activeEntityId = request()->route('id') ?? request()->query('entity_id') ?? null;
+
+                    // Check if the current route is specifically related to adding or editing a sector
+                    $isSectorRoute = request()->is('sectors/create*') || $currentRouteName == 'edit_sector';
+                @endphp
+
+                @foreach ($entitiesWithSectorCount as $entity)
+                    @php
+                        // Determine if this particular entity should be marked as active
+                        $isActiveEntity = $activeEntityId == $entity->id;
+                        // For sector-related routes, check if the active entity matches the entity being iterated on
+                        $isActiveForSectorRoute = $isSectorRoute && $isActiveEntity;
+                    @endphp
+
+                    <li class="menu-item {{ $isActiveEntity || $isActiveForSectorRoute ? 'active' : '' }}">
+                        <a href="{{ route('show_entity', ['id' => $entity->id]) }}" class="menu-link">
+                            <div>{{ $entity->name }}</div>
+                            <span class="badge bg-label-primary fs-tiny rounded-pill ms-auto">{{ $entity->sectors_count }}</span>
+                        </a>
+                    </li>
                 @endforeach
+
             </ul>
         </li>
     </ul>

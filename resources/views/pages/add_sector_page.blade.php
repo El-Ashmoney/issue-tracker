@@ -30,8 +30,8 @@
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <div class="col-xl">
                             <div class="card-margin card mb-4">
-                                <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h5 class="display-4 mb-0">Add Sector</h5>
+                                <div class="card-header align-items-center">
+                                    <h5 class="display-4 uppercase text-center mb-0">Add Sector</h5>
                                 </div>
                                 <div class="card-body">
                                     <form action="{{ Route('sector.store') }}" method="POST">

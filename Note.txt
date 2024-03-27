@@ -5,3 +5,8 @@ add source selector ['whatsapp', 'mail']
 Owners selection delete companies
 change scale to priority
 add new, pending to issue status
+
+
+
+
+Add new status option "Pending" // Done
