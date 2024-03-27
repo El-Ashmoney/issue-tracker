@@ -41,6 +41,9 @@ class IssueAssigneesController extends Controller
         if(!Auth::user()->role === 'Admin'){
             abort(403, 'Unauthorized Access');
         }else{
+            $request->validate([
+                'assignee_name' => 'required|string|max:255',
+            ]);
             $issue_assignee = new IssueAssignee;
             $issue_assignee->assignee_name = $request->assignee_name;
             $issue_assignee->save();

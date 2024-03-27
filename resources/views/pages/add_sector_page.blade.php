@@ -37,26 +37,32 @@
                                     <form action="{{ Route('sector.store') }}" method="POST">
                                         @csrf
                                         <div class="form-floating form-floating-outline mb-4">
-                                            <select class="form-select" name="entity_id" required id="exampleFormControlSelect1" aria-label="Default select example">
+                                            <select class="form-select" name="entity_id" id="exampleFormControlSelect1" aria-label="Default select example">
                                                 <option value="">Which Entity</option>
                                                 @foreach ($entities as $optionEntity)
                                                     <option value="{{ $optionEntity->id }}" {{ ($entity && $entity->id === $optionEntity->id) ? 'selected' : '' }}>{{ $optionEntity->name }}</option>
                                                 @endforeach
                                             </select>
                                             <label for="exampleFormControlSelect1">Select Entity <span class="mdi mdi-arrow-down-right"></span></label>
+                                            @error('entity_id')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="input-group input-group-merge mb-4">
                                             <span id="basic-icon-default-fullname2" class="input-group-text"><i class="mdi mdi-account-outline"></i></span>
                                             <input
-                                                required
                                                 type="text"
                                                 name="name"
                                                 class="form-control"
                                                 id="basic-icon-default-fullname"
                                                 placeholder="Sector Name"
                                                 aria-label="Full Name"
-                                                aria-describedby="basic-icon-default-fullname2" />
+                                                aria-describedby="basic-icon-default-fullname2"
+                                            />
                                         </div>
+                                        @error('name')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <button type="submit" class="update-btn btn btn-primary"><span class="mdi mdi-plus-thick"></span>&nbsp;Add</button>
                                     </form>
                                 </div>

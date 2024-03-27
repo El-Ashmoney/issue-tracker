@@ -41,6 +41,9 @@ class IssueOwnersController extends Controller
         if(!Auth::user()->role === 'Admin'){
             abort(403, 'Unauthorized Access');
         }else{
+            $request->validate([
+                'owner_name' => 'required|string|max:255',
+            ]);
             $issue_owner = new IssueOwner;
             $issue_owner->owner_name = $request->owner_name;
             $issue_owner->save();

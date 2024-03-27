@@ -152,7 +152,7 @@
             </ul>
         </li>
 
-        <li class="menu-item {{ request()->is('entities*', 'show_entity*', 'edit_sector*') ? 'open' : '' }}">
+        <li class="menu-item {{ request()->is('entities*', 'show_entity*', 'edit_sector*', 'sectors/create*') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons mdi mdi-view-grid-outline"></i>
                 <div data-i18n="Misc">Entities</div>
@@ -178,7 +178,6 @@
                     </li>
                 @endforeach
             </ul>
-
         </li>
     </ul>
 </aside>

@@ -24,12 +24,12 @@
                 <div class="navbar-nav align-items-center">
                     <div class="nav-item d-flex align-items-center me-2 bg-white rounded-pill">
                         <input
-                            type="search"
-                            id="search-input"
-                            name="query"
-                            class="w-64 form-control border-0 shadow-none rounded-pill"
-                            placeholder="Search for exist or add new"
-                            aria-label="search" />
+                        type="search"
+                        id="search-input"
+                        name="query"
+                        class="w-64 form-control border-0 shadow-none rounded-pill"
+                        placeholder="Search for exist or add new"
+                        aria-label="search" />
                     </div>
                 </div>
                 <button type="submit" class="update-btn btn-xs rounded-pill btn btn-primary"><i class="mdi mdi-magnify mdi-20px lh-0 me-1"></i>Search</button>

@@ -43,10 +43,13 @@
                                                 name="owner_name"
                                                 class="form-control"
                                                 id="basic-icon-default-fullname"
-                                                value="Eng. example"
+                                                placeholder="Eng. example"
                                                 aria-label="Issue Owner"
                                                 aria-describedby="basic-icon-default-fullname2" />
                                         </div>
+                                        @error('owner_name')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <button type="submit" class="update-btn btn btn-primary"><span class="mdi mdi-plus-thick me-1"></span>&nbsp;Add Owner</button>
                                     </form>
                                 </div>
