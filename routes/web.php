@@ -36,25 +36,29 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/users', [UsersController::class, 'index'])->name('users');
     Route::get('/edit_user/{id}', [UsersController::class, 'edit'])->name('edit_user');
     Route::post('/update_user/{id}', [UsersController::class, 'update'])->name('update_user');
-    Route::post('/delete_user/{id}', [UsersController::class, 'destroy'])->name('delete_user');
+    Route::get('/delete_user/{id}', [UsersController::class, 'destroy'])->name('delete_user');
 
     // Companies Route Controller
     Route::get('/companies', [CompaniesController::class, 'index'])->name('companies');
     Route::get('/edit_company/{id}', [CompaniesController::class, 'edit'])->name('edit_company');
     Route::post('/update_company/{id}', [CompaniesController::class, 'update'])->name('update_company');
-    Route::post('/delete_company/{id}', [CompaniesController::class, 'destroy'])->name('delete_company');
+    Route::get('/delete_company/{id}', [CompaniesController::class, 'destroy'])->name('delete_company');
 
     // Issue Owners Route Controller
     Route::get('/issue_owners', [IssueOwnersController::class, 'index'])->name('issue_owners');
     Route::get('/edit_issue_owner/{id}', [IssueOwnersController::class, 'edit'])->name('edit_issue_owner');
+    Route::get('/create_issue_owner', [IssueOwnersController::class, 'create'])->name('create_issue_owner');
+    Route::post('/add_issue_owner', [IssueOwnersController::class, 'store'])->name('add_issue_owner');
     Route::post('/update_issue_owner/{id}', [IssueOwnersController::class, 'update'])->name('update_issue_owner');
-    Route::post('/delete_issue_owner/{id}', [IssueOwnersController::class, 'destroy'])->name('delete_issue_owner');
+    Route::get('/delete_issue_owner/{id}', [IssueOwnersController::class, 'destroy'])->name('delete_issue_owner');
 
     // Issue Assignees Route Controller
     Route::get('/issue_assignees', [IssueAssigneesController::class, 'index'])->name('issue_assignees');
     Route::get('/edit_issue_assignee/{id}', [IssueAssigneesController::class, 'edit'])->name('edit_issue_assignee');
+    Route::get('/create_issue_assignee', [IssueAssigneesController::class, 'create'])->name('create_issue_assignee');
+    Route::post('/add_issue_assignee', [IssueAssigneesController::class, 'store'])->name('add_issue_assignee');
     Route::post('/update_issue_assignee/{id}', [IssueAssigneesController::class, 'update'])->name('update_issue_assignee');
-    Route::post('/delete_issue_assignee/{id}', [IssueAssigneesController::class, 'destroy'])->name('delete_issue_assignee');
+    Route::get('/delete_issue_assignee/{id}', [IssueAssigneesController::class, 'destroy'])->name('delete_issue_assignee');
 
     // Issue Route Controller
     Route::get('/issues', [IssuesController::class, 'index'])->name('issues');
@@ -63,7 +67,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::post('/add_issue', [IssuesController::class, 'create'])->name('add_issue');
     Route::get('/edit_issue/{id}', [IssuesController::class, 'edit'])->name('edit_issue');
     Route::post('/update_issue/{id}', [IssuesController::class, 'update'])->name('update_issue');
-    Route::post('/delete_issue/{id}', [IssuesController::class, 'destroy'])->name('delete_issue');
+    Route::get('/delete_issue/{id}', [IssuesController::class, 'destroy'])->name('delete_issue');
     Route::get('/export-issues', [IssuesController::class, 'exportIssues'])->name('export.issues');
 
     // Entities Route Controller
@@ -77,7 +81,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::post('/sectors/store', [SectorsController::class, 'store'])->name('sector.store');
     Route::get('/edit_sector/{id}', [SectorsController::class, 'edit'])->name('edit_sector');
     Route::post('/update_sector/{id}', [SectorsController::class, 'update'])->name('update_sector');
-    Route::post('/delete_sector/{id}', [SectorsController::class, 'destroy'])->name('delete_sector');
+    Route::get('/delete_sector/{id}', [SectorsController::class, 'destroy'])->name('delete_sector');
 
     // Search Route Controller
     Route::get('/search', [SearchController::class, 'search'])->name('search');
@@ -87,6 +91,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/azure_issues', [AzureDevOpsController::class, 'index'])->name('azure_issues');
     Route::get('/azure-devops/work-item/{workItemId}', [AzureDevOpsController::class, 'getWorkItem'])->name('azure-devops.sraco-work-item');
     Route::post('/azure-issue/add', [AzureDevOpsController::class, 'addIssue'])->name('azure.issue.add');
+    Route::get('/azure-issue/delete/{workItemId}', [AzureDevOpsController::class, 'delete'])->name('azure.issue.delete');
     Route::get('/export-issues', [AzureDevOpsController::class, 'exportIssues'])->name('export.issues');
-
 });

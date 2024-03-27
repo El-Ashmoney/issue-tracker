@@ -25,7 +25,27 @@ class IssueOwnersController extends Controller
      */
     public function create()
     {
-        //
+        if(!Auth::user()->role === 'Admin'){
+            abort(403, 'Unauthorized Access');
+        }else{
+            $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
+            return view('pages.add_issue_owner', compact('sectorsWithEntities'));
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        if(!Auth::user()->role === 'Admin'){
+            abort(403, 'Unauthorized Access');
+        }else{
+            $issue_owner = new IssueOwner;
+            $issue_owner->owner_name = $request->owner_name;
+            $issue_owner->save();
+            return redirect()->route('issue_owners')->with('message', 'Issue owner added successfully');
+        }
     }
 
     /**

@@ -204,7 +204,7 @@ class AzureDevOpsController extends Controller
         // Redirect output to a client’s web browser (Excel5)
         $writer = new Xlsx($spreadsheet);
 
-        $fileName = "issues_export_" . date('Ymd') . ".xlsx";
+        $fileName = "azure_issues_export_" . date('Ymd') . ".xlsx";
         $temp_file = tempnam(sys_get_temp_dir(), $fileName);
 
         // Create a StreamedResponse to download file
@@ -223,5 +223,11 @@ class AzureDevOpsController extends Controller
         );
 
         return $response;
+    }
+
+    public function delete($workItemId){
+        $issue = AzureIssue::findOrFail($workItemId);
+        $issue->delete();
+        return redirect()->route('azure_issues')->with('message', 'Issue deleted successfully');
     }
 }

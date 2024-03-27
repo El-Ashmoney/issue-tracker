@@ -25,7 +25,12 @@ class IssueAssigneesController extends Controller
      */
     public function create()
     {
-        //
+        if(!Auth::user()->role === 'Admin'){
+            abort(403, 'Unauthorized Access');
+        }else{
+            $sectorsWithEntities = Sector::with('entity')->get()->groupBy('entity.name');
+            return view('pages.add_issue_assignee', compact('sectorsWithEntities'));
+        }
     }
 
     /**
@@ -33,7 +38,14 @@ class IssueAssigneesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(!Auth::user()->role === 'Admin'){
+            abort(403, 'Unauthorized Access');
+        }else{
+            $issue_assignee = new IssueAssignee;
+            $issue_assignee->assignee_name = $request->assignee_name;
+            $issue_assignee->save();
+            return redirect()->route('issue_assignees')->with('message', 'Issue assignee added successfully');
+        }
     }
 
     /**
@@ -67,7 +79,7 @@ class IssueAssigneesController extends Controller
             $issue_assignee = IssueAssignee::find($id);
             $issue_assignee->assignee_name = $request->assignee_name;
             $issue_assignee->save();
-            return redirect()->route('issue_assignees')->with('message', 'Issue Assignee Updated Successfully');
+            return redirect()->route('issue_assignees')->with('message', 'Issue assignee uUpdated successfully');
         } else {
             abort(403, 'Unauthorized Access');
         }
@@ -81,7 +93,7 @@ class IssueAssigneesController extends Controller
         if (Auth::user()->role === 'Admin') {
             $issue_assignee = IssueAssignee::find($id);
             $issue_assignee->delete();
-            return redirect()->route('issue_assignees')->with('message', 'Issue Assignee Deleted Successfully');
+            return redirect()->route('issue_assignees')->with('message', 'Issue assignee deleted successfully');
         } else {
             abort(403, 'Unauthorized Access');
         }

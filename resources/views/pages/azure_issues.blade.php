@@ -110,7 +110,7 @@
                                                         <a href="{{ Route('edit_issue', $issue->work_item_id) }}" class="badge btn rounded-pill btn-outline-dark waves-effect">
                                                             <i class="mdi mdi-pencil-outline me-1"></i> Edit
                                                         </a>
-                                                        <a href="{{ Route('delete_issue', $issue->work_item_id) }}" class="badge btn rounded-pill btn-danger waves-effect waves-light" onclick="return confirm('Are You Sure!')">
+                                                        <a href="{{ Route('azure.issue.delete', $issue->work_item_id) }}" class="badge btn rounded-pill btn-danger waves-effect waves-light" onclick="return confirm('Are You Sure!')">
                                                             <i class="mdi mdi-trash-can-outline me-1"></i> Delete
                                                         </a>
                                                     @else

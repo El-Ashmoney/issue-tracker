@@ -119,7 +119,7 @@
         <li class="menu-header fw-medium mt-4">
             <span class="menu-header-text">Misc</span>
         </li>
-        <li class="menu-item {{ request()->is('companies*', 'edit_company*', 'issue_assignees*', 'edit_issue_assignee*', 'issue_owners*', 'edit_issue_owner*', 'users*', 'edit_user*') ? 'open' : '' }}">
+        <li class="menu-item {{ request()->is('companies*', 'edit_company*', 'issue_assignees*', 'edit_issue_assignee*', 'issue_owners*', 'edit_issue_owner*', 'users*', 'edit_user*', 'create_issue_assignee', 'create_issue_owner') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons mdi mdi-cube-outline"></i>
                 <div data-i18n="Misc">Misc</div>
@@ -131,13 +131,13 @@
                         <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $companies_count }}</span>
                     </a>
                 </li>
-                <li class="menu-item {{ request()->is('issue_assignees', 'edit_issue_assignee/*') ? 'active' : '' }}">
+                <li class="menu-item {{ request()->is('issue_assignees', 'edit_issue_assignee/*', 'create_issue_assignee*') ? 'active' : '' }}">
                     <a href="{{ Route('issue_assignees') }}" class="menu-link">
                         <div data-i18n="Issue-Assignees">Issue Assignees</div>
                         <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $issue_assignees_count }}</span>
                     </a>
                 </li>
-                <li class="menu-item {{ request()->is('issue_owners', 'edit_issue_owner/*') ? 'active' : '' }}">
+                <li class="menu-item {{ request()->is('issue_owners', 'edit_issue_owner/*', 'create_issue_owner') ? 'active' : '' }}">
                     <a href="{{ Route('issue_owners') }}" class="menu-link">
                         <div data-i18n="Issue-Owners">Issue Owners</div>
                         <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-label-danger ms-1">{{ $issue_owners_count }}</span>

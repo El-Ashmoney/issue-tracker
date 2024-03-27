@@ -224,7 +224,7 @@ class IssuesController extends Controller
         $issue->status            = $request->status;
         $issue->azure_status      = $request->azure_status;
         $issue->save();
-        return redirect()->route('issues')->with('message', 'Issue Updated Successfully');
+        return redirect()->route('issues')->with('message', 'Issue updated successfully');
     }
 
     /**
@@ -235,7 +235,7 @@ class IssuesController extends Controller
         if (Auth::user()->role === 'Admin') {
             $issue = Issue::find($id);
             $issue->delete();
-            return redirect()->route('issues')->with('message', 'Issue Updated Successfully');
+            return redirect()->route('issues')->with('message', 'Issue deleted successfully');
         } else {
             abort(403, 'Unauthorized Access');
         }
