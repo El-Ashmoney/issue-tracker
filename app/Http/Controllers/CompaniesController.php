@@ -41,6 +41,9 @@ class CompaniesController extends Controller
         if (!Auth::user()->role === 'Admin') {
             abort(403, 'Unauthorized Access');
         } else {
+            $request->validate([
+                'company_name' => 'required|string|max:255',
+            ]);
             $company = new Company;
             $company->company_name = $request->company_name;
             $company->save();

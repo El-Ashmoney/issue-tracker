@@ -45,8 +45,12 @@
                                                 id="basic-icon-default-fullname"
                                                 placeholder="Company Name"
                                                 aria-label="Issue Assignee"
-                                                aria-describedby="basic-icon-default-fullname2" />
+                                                aria-describedby="basic-icon-default-fullname2"
+                                            />
                                         </div>
+                                        @error('company_name')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                         <button type="submit" class="update-btn btn btn-primary"><span class="mdi mdi-plus-thick me-1"></span>&nbsp;Add Company</button>
                                     </form>
                                 </div>
