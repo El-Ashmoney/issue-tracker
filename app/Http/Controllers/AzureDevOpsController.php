@@ -36,8 +36,8 @@ class AzureDevOpsController extends Controller
 
         $projects = collect($projectsData)->map(function ($project) {
             return [
-                'id' => $project['name'], // Use project name as the value
-                'name' => $project['name'], // Display name in the dropdown
+                'id' => $project['name'],
+                'name' => $project['name'],
             ];
         })->all();
 

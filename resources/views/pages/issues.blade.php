@@ -46,7 +46,7 @@
                                             <th>Issue</th>
                                             <th>Owner</th>
                                             <th>Assignee</th>
-                                            <th>Scale</th>
+                                            <th>Priority</th>
                                             <th>Company</th>
                                             <th>Duration</th>
                                             <th>Issue Date</th>

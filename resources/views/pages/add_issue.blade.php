@@ -43,10 +43,17 @@
                                             </div>
                                             <div class="form-floating form-floating-outline mb-4">
                                                 <select class="form-select" name="sector_id" id="exampleFormControlSelect1" aria-label="Default select example">
-                                                    <option selected="">Which Sector</option>
-                                                    @foreach ($sectors as $sector)
-                                                        <option value="{{ $sector->id }}">{{ $sector->name }}</option>
+                                                    <option value="" disabled selected>Which Sector</option>
+                                                    @foreach ($sectorsWithEntities as $entityName => $sectors)
+                                                        <optgroup label="{{ $entityName }}">
+                                                            @foreach ($sectors as $sector)
+                                                                <option value="{{ $sector->id }}">{{ $sector->name }}</option>
+                                                            @endforeach
+                                                        </optgroup>
                                                     @endforeach
+                                                    {{-- @foreach ($sectors as $sector)
+                                                        <option value="{{ $sector->id }}">{{ $sector->name }}</option>
+                                                    @endforeach --}}
                                                 </select>
                                                 <label for="exampleFormControlSelect1">Select Sector <span class="mdi mdi-arrow-down-right"></span></label>
                                                 @error('sector_id')
@@ -55,7 +62,7 @@
                                             </div>
                                             <div class="form-floating form-floating-outline mb-4">
                                                 <select class="form-select" id="exampleFormControlSelect1" name="owner_id" aria-label="Default select example">
-                                                    <option selected="">Which Owner</option>
+                                                    <option value="" disabled selected>Which Owner</option>
                                                     @foreach ($owners as $owner)
                                                         <option value="{{ $owner->owner_id }}">{{ $owner->owner_name }}</option>
                                                     @endforeach
@@ -67,7 +74,7 @@
                                             </div>
                                             <div class="form-floating form-floating-outline mb-4">
                                                 <select class="form-select" id="exampleFormControlSelect1" name="assignee_id" aria-label="Default select example">
-                                                    <option selected="">Which Assignee</option>
+                                                    <option value="" disabled selected>Which Assignee</option>
                                                     @foreach ($assignees as $assignee)
                                                         <option value="{{ $assignee->assignee_id }}">{{ $assignee->assignee_name }}</option>
                                                     @endforeach
@@ -79,7 +86,7 @@
                                             </div>
                                             <div class="form-floating form-floating-outline mb-4">
                                                 <select class="form-select" id="exampleFormControlSelect1" name="company_id" aria-label="Default select example">
-                                                    <option selected="">Which Company</option>
+                                                    <option value="" disabled selected>Which Company</option>
                                                     @foreach ($companies as $company)
                                                         <option value="{{ $company->company_id }}">{{ $company->company_name }}</option>
                                                     @endforeach
@@ -91,19 +98,19 @@
                                             </div>
                                             <div class="form-floating form-floating-outline mb-4">
                                                 <select class="form-select" id="exampleFormControlSelect1" name="scale" aria-label="Default select example">
-                                                    <option value="">Scale</option>
+                                                    <option value="" disabled selected>Priority</option>
                                                     @foreach ($scaleOption as $option)
                                                         <option value="{{ $option }}">{{ $option }}</option>
                                                     @endforeach
                                                 </select>
-                                                <label for="exampleFormControlSelect1">Select Scale <span class="mdi mdi-arrow-down-right"></span></label>
+                                                <label for="exampleFormControlSelect1">Select Priority <span class="mdi mdi-arrow-down-right"></span></label>
                                                 @error('scale')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                             <div class="form-floating form-floating-outline mb-4">
                                                 <select class="form-select" id="exampleFormControlSelect1" name="status" aria-label="Default select example">
-                                                    <option value="">Status</option>
+                                                    <option value="" disabled selected>Status</option>
                                                     @foreach ($statusOption as $option)
                                                         <option value="{{ $option }}">{{ $option }}</option>
                                                     @endforeach
@@ -115,7 +122,7 @@
                                             </div>
                                             <div class="form-floating form-floating-outline mb-4">
                                                 <select class="form-select" id="exampleFormControlSelect1" name="azure_status" aria-label="Default select example">
-                                                    <option value="">Azure Status</option>
+                                                    <option value="" disabled selected>Azure Status</option>
                                                     @foreach ($azureOption as $option)
                                                         <option value="{{ $option }}">{{ $option }}</option>
                                                     @endforeach
