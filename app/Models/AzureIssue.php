@@ -15,6 +15,7 @@ class AzureIssue extends Model
         'issue_type',
         'title',
         'description',
+        'added_by',
         'created_by',
         'resolved_by',
         'status',

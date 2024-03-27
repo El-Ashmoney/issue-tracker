@@ -9,6 +9,7 @@ use App\Models\Company;
 use App\Models\AzureIssue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Database\QueryException;
@@ -76,6 +77,8 @@ class AzureDevOpsController extends Controller
 
     public function addIssue(Request $request)
     {
+        $user = Auth::user();
+        Log::info('Authenticated user', ['user' => $user]);
         $request->validate([
             'company_id' => 'required',
             'issue_number' => 'required|numeric',
@@ -92,7 +95,7 @@ class AzureDevOpsController extends Controller
             }
 
             DB::beginTransaction();
-            try{
+            try {
                 $issue_type             = strip_tags(html_entity_decode($workItem['fields']['System.WorkItemType'] ?? null));
                 $title                  = strip_tags($workItem['fields']['System.Title']);
                 $description            = strip_tags(html_entity_decode($workItem['fields']['Microsoft.VSTS.TCM.ReproSteps'] ?? null));
@@ -113,6 +116,7 @@ class AzureDevOpsController extends Controller
                     'issue_type'            => $issue_type,
                     'title'                 => $title,
                     'description'           => $description,
+                    'added_by'              => Auth::user()->username,
                     'created_by'            => $createdBy,
                     'resolved_by'           => $resolvedBy,
                     'status'                => $status,
@@ -127,7 +131,7 @@ class AzureDevOpsController extends Controller
                 $azureIssue->save();
                 DB::commit();
                 return redirect()->route('azure_issues')->with('message', 'Issue added successfully');
-            }catch(QueryException $e){
+            } catch (QueryException $e) {
                 DB::rollBack();
                 $errorCode = $e->errorInfo[1];
                 if ($errorCode == 1062) {
@@ -150,17 +154,18 @@ class AzureDevOpsController extends Controller
         $sheet->setCellValue('C1', 'Type');
         $sheet->setCellValue('D1', 'Title');
         $sheet->setCellValue('E1', 'Description');
-        $sheet->setCellValue('F1', 'Created By');
-        $sheet->setCellValue('G1', 'Resolved By');
-        $sheet->setCellValue('H1', 'status');
-        $sheet->setCellValue('I1', 'priority');
-        $sheet->setCellValue('J1', 'discipline');
-        $sheet->setCellValue('K1', 'teams');
-        $sheet->setCellValue('L1', 'source');
-        $sheet->setCellValue('M1', 'Worked Time');
-        $sheet->setCellValue('N1', 'Description of Close');
-        $sheet->setCellValue('O1', 'Created Date');
-        $sheet->setCellValue('P1', 'Created At');
+        $sheet->setCellValue('F1', 'Added By');
+        $sheet->setCellValue('G1', 'Created By');
+        $sheet->setCellValue('H1', 'Resolved By');
+        $sheet->setCellValue('I1', 'status');
+        $sheet->setCellValue('J1', 'priority');
+        $sheet->setCellValue('K1', 'discipline');
+        $sheet->setCellValue('L1', 'teams');
+        $sheet->setCellValue('M1', 'source');
+        $sheet->setCellValue('N1', 'Worked Time');
+        $sheet->setCellValue('O1', 'Description of Close');
+        $sheet->setCellValue('P1', 'Created Date');
+        $sheet->setCellValue('Q1', 'Created At');
 
         $headingStyle = [
             'fill' => [
@@ -187,17 +192,18 @@ class AzureDevOpsController extends Controller
             $sheet->setCellValue('C' . $row, $issue->issue_type);
             $sheet->setCellValue('D' . $row, $issue->title);
             $sheet->setCellValue('E' . $row, $issue->description);
-            $sheet->setCellValue('F' . $row, $issue->created_by);
-            $sheet->setCellValue('G' . $row, $issue->resolved_by);
-            $sheet->setCellValue('H' . $row, $issue->status);
-            $sheet->setCellValue('I' . $row, $issue->priority);
-            $sheet->setCellValue('J' . $row, $issue->discipline);
-            $sheet->setCellValue('K' . $row, $issue->teams);
-            $sheet->setCellValue('L' . $row, $issue->source);
-            $sheet->setCellValue('M' . $row, $issue->worked_time);
-            $sheet->setCellValue('N' . $row, $issue->description_of_close);
-            $sheet->setCellValue('O' . $row, $issue->created_date);
-            $sheet->setCellValue('P' . $row, $issue->created_at);
+            $sheet->setCellValue('F' . $row, $issue->added_by);
+            $sheet->setCellValue('G' . $row, $issue->created_by);
+            $sheet->setCellValue('H' . $row, $issue->resolved_by);
+            $sheet->setCellValue('I' . $row, $issue->status);
+            $sheet->setCellValue('J' . $row, $issue->priority);
+            $sheet->setCellValue('K' . $row, $issue->discipline);
+            $sheet->setCellValue('L' . $row, $issue->teams);
+            $sheet->setCellValue('M' . $row, $issue->source);
+            $sheet->setCellValue('N' . $row, $issue->worked_time);
+            $sheet->setCellValue('O' . $row, $issue->description_of_close);
+            $sheet->setCellValue('P' . $row, $issue->created_date);
+            $sheet->setCellValue('Q' . $row, $issue->created_at);
             $row++;
         }
 
@@ -225,7 +231,8 @@ class AzureDevOpsController extends Controller
         return $response;
     }
 
-    public function delete($workItemId){
+    public function delete($workItemId)
+    {
         $issue = AzureIssue::findOrFail($workItemId);
         $issue->delete();
         return redirect()->route('azure_issues')->with('message', 'Issue deleted successfully');
