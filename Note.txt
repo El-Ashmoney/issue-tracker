@@ -1,9 +1,8 @@
 Add 'SLA' after Duration substract the creation date from now() until status === 'Finished' and add notification to the owner or alarm if time more than High = 2 Medium = 4 Low = 8h & stop if fininshed
 add sort function
-add select entities before sectors to relay on for more filteration
 add source selector ['whatsapp', 'mail']
-
-
+-------------------------------------------------------
+Sectors group by entity name in the selector // Done
 Delete Companies from Issue Owners Selector // Done
 Change "Scale" to "Priority" // Done
 Add new status option "Pending" // Done

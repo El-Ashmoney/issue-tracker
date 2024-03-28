@@ -94,6 +94,7 @@ class IssuesController extends Controller
         $issue->company_id        = $request->company_id;
         $issue->scale             = $request->scale;
         $issue->time_duration     = $request->time_duration;
+        $issue->source            = $request->source;
         $issue->status            = $request->status;
         $issue->azure_status      = $request->azure_status;
         $issue->save();
@@ -221,6 +222,7 @@ class IssuesController extends Controller
         $issue->company_id        = $request->company_id;
         $issue->scale             = $request->scale;
         $issue->time_duration     = $request->time_duration;
+        $issue->source            = $request->source;
         $issue->status            = $request->status;
         $issue->azure_status      = $request->azure_status;
         $issue->save();

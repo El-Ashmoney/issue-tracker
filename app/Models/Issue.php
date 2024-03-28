@@ -27,6 +27,7 @@ class Issue extends Model
         'company_id',
         'time_duration',
         'issue_date',
+        'source',
         'status',
         'azure_status',
         'resolved_at',

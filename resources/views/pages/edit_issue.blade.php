@@ -84,6 +84,10 @@
                                                 <label for="exampleFormControlSelect1">Select Scale <span class="mdi mdi-arrow-down-right"></span></label>
                                             </div>
                                             <div class="form-floating form-floating-outline mb-4">
+                                                <input type="text" class="form-control" id="floatingInput" placeholder="Ex: Whatsapp, Call or Mail" value="{{ $issue->source }}" aria-describedby="floatingInputHelp">
+                                                <label for="floatingInput">Source</label>
+                                            </div>
+                                            <div class="form-floating form-floating-outline mb-4">
                                                 <select class="form-select" id="exampleFormControlSelect1" name="status" aria-label="Default select example">
                                                     <option selected value="{{ $issue->status }}">{{ $issue->status }}</option>
                                                     @foreach ($statusOption as $option)
